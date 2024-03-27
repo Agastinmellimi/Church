@@ -1,13 +1,400 @@
+@import url("https://fonts.googleapis.com/css2?family=Anek+Odia:wght@100..800&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Trispace:wght@100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Madimi+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Revalia&family=Ruslan+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
+/* font-family: "Archivo Black", sans-serif; */
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+/* font-family: "IBM Plex Mono", monospace; */
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Rowdies:wght@300;400;700&display=swap");
+/* font-family: "Rowdies", sans-serif; */
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rowdies:wght@300;400;700&display=swap");
+/* font-family: "Montserrat Alternates", sans-serif; */
+@import url("https://fonts.googleapis.com/css2?family=Pathway+Extreme:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Allan:wght@400;700&family=Madimi+One&family=Truculenta:opsz,wght@12..72,100..900&display=swap");
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+  -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
+  outline: none !important;
 }
 
+* {
+  box-sizing: border-box;
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(219, 219, 219, 0.27000001072883606);
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.slick-slide > div {
+  margin: 0;
+}
+@media (min-width: 561px) {
+  .slick-slide > div {
+    margin: 0 8px;
+  }
+}
+
+.slider {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 20px;
+}
+@media (min-width: 601px) {
+  .slider {
+    height: 200px;
+  }
+  .slick-slide > div {
+    height: 200px;
+    overflow: auto;
+  }
+}
+.slick-dots li.slick-active button:before {
+  color: #9feb88 !important;
+}
+.slick-dots li button::before {
+  font-size: 8px !important;
+  font-weight: 700 !important;
+  color: #739668 !important;
+  opacity: 0.5;
+}
+.slick-slider {
+  overflow: hidden;
+}
+
+.slick-slide {
+  position: relative;
+  opacity: 0;
+  transition: opacity ease-in-out 0.5s;
+}
+
+.slick-active {
+  opacity: 1;
+}
+
+.slick-prev,
+.slick-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.slick-prev {
+  left: 0;
+}
+
+.slick-next {
+  right: 0;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  opacity: 0.75;
+}
+.ChildStaus .emoji {
+  transition: transform 0.4s ease-in-out;
+}
+.sadEmoji {
+  transition: transform 0.4s ease-in-out;
+}
+
+.ChildStaus:hover .emoji {
+  transform: scale(1.3);
+}
+
+.ChildStaus:hover .sadEmoji {
+  animation: fade 0.4s ease-in-out infinite alternate;
+  transform: scale(1.1);
+}
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+  from {
+    opacity: 0.6;
+  }
+}
+.typer {
+  font-size: 25px;
+  font-family: "Pathway Extreme", sans-serif;
+  font-weight: 700;
+  color: #f5d271;
+  letter-spacing: 0.05em;
+  margin-top: 5px;
+  width: 90%;
+  align-self: center;
+}
+.typer-information {
+  font-size: 20px;
+  font-family: "Pathway Extreme", sans-serif;
+  font-weight: 700;
+  background-color: #f4d03f;
+  background-image: linear-gradient(132deg, #f4d03f 0%, #16a085 100%);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.05em;
+  margin-top: 5px;
+}
+.btn {
+  margin-top: 20px;
+  position: relative;
+  display: flex;
+  padding: 10px 30px;
+  outline: none;
+  border: none;
+  letter-spacing: 1px;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 30px;
+  background-color: transparent;
+  transition: color 0.6s ease-in-out;
+}
+
+.btn span {
+  position: relative;
+  z-index: 1;
+  font-family: "Pathway Extreme", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
+
+  transition: width 0.5s, height 0.5s;
+}
+.btn:hover::before {
+  width: 350px;
+  height: 350px;
+}
+
+.btn:hover {
+  color: #fff !important;
+}
+.quotes {
+  font-size: 15px;
+}
+.sub {
+  font-family: "Pathway Extreme", sans-serif;
+  font-size: 20px;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 20px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 25px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.sub:hover span {
+  color: #2d2d2e !important;
+}
+.sub span {
+  position: relative;
+  z-index: 1;
+  font-family: "Pathway Extreme", sans-serif;
+  font-size: 25px;
+  font-weight: 500;
+  transition: color 0.6s ease-in-out;
+}
+.sub::before {
+  content: "";
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+
+  background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+
+  transition: width 0.5s, height 0.5s;
+}
+.sub:hover::before {
+  width: 350px;
+  height: 350px;
+}
+.type {
+  display: inline-block;
+  align-self: flex-end;
+
+  font-weight: bold;
+  font-family: "Montserrat Alternates", sans-serif;
+  text-shadow: 1px 0 10px #000;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 700px) {
+  .type {
+    display: none;
+  }
+}
+@media (min-width: 700px) and (max-width: 1170px) {
+  .type {
+    margin-right: 15px;
+  }
+}
+.content {
+  margin-left: auto;
+  width: 70%;
+  display: block;
+}
+.mobile-type {
+  display: none;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 18px;
+  font-family: "Pathway Extreme", sans-serif;
+
+  word-break: break-all;
+}
+.icon {
+  font-size: 0;
+  transition: all 0.4s ease-in-out;
+  position: relative;
+}
+.send-btn:hover .icon {
+  font-size: inherit;
+  margin-left: 5px;
+  font-weight: 700;
+}
+@media (max-width: 700px) {
+  .content {
+    display: none;
+  }
+  .mobile-type {
+    display: block;
+  }
+}
+.arrow {
+  font-size: 0;
+  transition: all 0.4s ease-in-out;
+}
+.name:hover .arrow {
+  font-size: inherit;
+  margin-left: 3px;
+}
+.back-icon {
+  font-size: 0;
+  transition: all 0.4s ease-in-out;
+}
+.back:hover .back-icon {
+  font-size: inherit;
+  margin-right: 5px;
+}
+
+@media (min-width: 700px) and (max-width: 1170px) {
+  .content {
+    margin-right: 15px;
+    width: 55%;
+    margin-left: 40px;
+  }
+}
+@media (max-width: 299px) {
+  .content {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+  }
+  .mobile-type {
+    display: none;
+  }
+  .type {
+    display: inline-block;
+  }
+}
+@media (min-width: 401px) and (max-width: 800px) {
+  .typer {
+    font-size: 20px;
+    height: 45px;
+  }
+  .quotes {
+    font-size: 12px;
+  }
+  .typer-information {
+    font-size: 18px;
+  }
+  .btn span {
+    font-size: 18px;
+  }
+  .sub span {
+    font-size: 18px;
+  }
+}
+@media (max-width: 400px) {
+  .typer {
+    font-size: 17px;
+    height: 50px;
+    overflow: auto;
+  }
+  .quotes {
+    font-size: 11px;
+  }
+  .typer-information {
+    font-size: 15px;
+  }
+  .btn span {
+    font-size: 15px;
+  }
+  .sub span {
+    font-size: 15px;
+  }
 }
