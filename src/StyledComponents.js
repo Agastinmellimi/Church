@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  background-color: ${(props) => (props.$mode ? "#ffffff" : "#2b2b2b")};
+  background-color: ${(props) => (props.$mode ? "#ffffff" : "#262626")};
   transition: all 0.3s ease-in-out;
 `;
 
