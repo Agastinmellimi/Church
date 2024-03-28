@@ -53,11 +53,11 @@ export const AboutBannerContainer = styled.div`
 export const BannerImageContainer = styled.div`
   position: sticky;
   height: 240px;
-  width: 250px;
+  width: 240px;
   transform: translate(5%, -50%) translateY(40%);
   border-radius: 50%;
   border: ${(props) =>
-    props.$mode ? "5px solid #383838" : "5px solid #208a4a"};
+    props.$mode ? "3px solid #383838" : "3px solid #208a4a"};
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
