@@ -6,6 +6,7 @@ export const NavContainer = styled.nav`
   justify-content: space-between;
   padding: 0 20px;
   overflow: auto;
+  flex-shrink: 0;
 `;
 
 export const WebsiteLogo = styled.h1`

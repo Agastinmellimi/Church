@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import HandlerContext from "../../Context/HandlerContext";
 import { BsMenuButtonWideFill } from "react-icons/bs";
 import { IoCloseSharp } from "react-icons/io5";
+import { IoHome } from "react-icons/io5";
+import { FaLeaf } from "react-icons/fa6";
+import { FaUserCheck } from "react-icons/fa";
+import { FaClipboardList } from "react-icons/fa";
 import "./index.css";
 
 const MOBILE_NAV_ITEMS = [
@@ -115,7 +119,35 @@ const MobileNavbar = () => {
   return (
     <HandlerContext.Consumer>
       {(value) => {
-        const { lightMode, setActiveTab } = value;
+        const { lightMode, setActiveTab, activeTab } = value;
+        const getTabName = (option) => {
+          switch (option) {
+            case "Home":
+              return "HOME";
+            case "About":
+              return "ABOUT";
+            case "Attendance":
+              return "ATTENDANCE";
+            case "Church Timings":
+              return "TIMINGS";
+            default:
+              return "";
+          }
+        };
+        const getIcon = (option) => {
+          switch (option) {
+            case "Home":
+              return <IoHome style={{ marginRight: "3px" }} />;
+            case "About":
+              return <FaLeaf style={{ marginRight: "3px" }} />;
+            case "Attendance":
+              return <FaUserCheck style={{ marginRight: "3px" }} />;
+            case "Church Timings":
+              return <FaClipboardList style={{ marginRight: "3px" }} />;
+            default:
+              return "";
+          }
+        };
         const clickOption = (option) => {
           const navigateCorrespondingRoute = (route) => {
             switch (route) {
@@ -131,20 +163,7 @@ const MobileNavbar = () => {
                 return null;
             }
           };
-          const getTabName = (option) => {
-            switch (option) {
-              case "Home":
-                return "HOME";
-              case "About":
-                return "ABOUT";
-              case "Attendance":
-                return "ATTENDANCE";
-              case "Church Timings":
-                return "TIMINGS";
-              default:
-                return "";
-            }
-          };
+
           setActiveTab(getTabName(option));
           navigateCorrespondingRoute(option);
           setMobileNavOpen(false);
@@ -191,9 +210,23 @@ const MobileNavbar = () => {
                     <motion.div
                       onClick={() => clickOption(navItem.navTitle)}
                       className="optionName"
-                      style={{ color: lightMode ? "#000" : "#fff" }}
+                      style={{
+                        color:
+                          activeTab === getTabName(navItem.navTitle)
+                            ? lightMode
+                              ? "#3a5ed6"
+                              : "#6788f5"
+                            : lightMode
+                            ? "#3c3c3d"
+                            : "#c7c8c9",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                      }}
                       variants={liVariant}
                     >
+                      {getIcon(navItem.navTitle)}
                       {navItem.navTitle}
                     </motion.div>
                   </motion.li>
