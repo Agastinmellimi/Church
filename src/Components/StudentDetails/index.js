@@ -142,7 +142,7 @@ const StudentDeatils = () => {
             <Paragraph $mode={lightMode}>Sorry!, there is some error</Paragraph>
             <button
               type="button"
-              onClick={() => getChildrenData()}
+              onClick={() => getChildrenData(id)}
               style={{
                 outline: "none",
                 border: "none",
@@ -372,7 +372,7 @@ const StudentDeatils = () => {
             </Paragraph>
             <button
               type="button"
-              onClick={() => getChildrenData()}
+              onClick={() => getChildrenData(id)}
               style={{
                 outline: "none",
                 border: "none",
