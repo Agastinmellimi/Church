@@ -340,7 +340,13 @@ code {
   font-size: inherit;
   margin-right: 5px;
 }
-
+.link {
+  transition: all 0.3s ease-in-out;
+}
+.link:hover {
+  color: #4a9dd4 !important;
+  transform: scale(1.1);
+}
 @media (min-width: 700px) and (max-width: 1170px) {
   .content {
     margin-right: 15px;

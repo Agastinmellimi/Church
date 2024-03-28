@@ -4,6 +4,7 @@ import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+import MobileNavbar from "../MobileNavbar";
 
 import Zoom from "@mui/material/Zoom";
 import { NavContainer, WebsiteLogo } from "./StyledComponents";
@@ -36,20 +37,33 @@ const Navbar = () => (
             </span>
             JCPC
           </WebsiteLogo>
-          <LightTooltip
-            TransitionComponent={Zoom}
-            title={lightMode ? "Dark" : "Light"}
-            enterDelay={500}
-            leaveDelay={200}
+          <div
+            style={{
+              display: "flex",
+              margin: 0,
+              padding: 0,
+            }}
           >
-            <IconButton aria-label="mode" onClick={() => setMode()}>
-              {lightMode ? (
-                <MdDarkMode color="#000" size={30} />
-              ) : (
-                <MdLightMode color="#ffff" size={30} />
-              )}
-            </IconButton>
-          </LightTooltip>
+            <MobileNavbar />
+            <LightTooltip
+              TransitionComponent={Zoom}
+              title={lightMode ? "Dark" : "Light"}
+              enterDelay={500}
+              leaveDelay={200}
+            >
+              <IconButton
+                style={{ margin: 0 }}
+                aria-label="mode"
+                onClick={() => setMode()}
+              >
+                {lightMode ? (
+                  <MdDarkMode color="#000" size={30} />
+                ) : (
+                  <MdLightMode color="#ffff" size={30} />
+                )}
+              </IconButton>
+            </LightTooltip>
+          </div>
         </NavContainer>
       );
     }}

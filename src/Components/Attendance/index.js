@@ -924,7 +924,9 @@ const Attendance = () => {
                       color: lightMode ? "#6ede6a" : "#8abfe6",
                     },
 
-                    svg: { color: lightMode ? "#6ede6a" : "#8abfe6" },
+                    svg: {
+                      color: lightMode ? "#6ede6a" : "#8abfe6",
+                    },
                     input: {
                       color: lightMode ? "#383737" : "#fff",
                       fontSize: "16px",

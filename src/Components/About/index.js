@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import HandlerContext from "../../Context/HandlerContext";
+import { SiMaildotcom } from "react-icons/si";
 import {
   AboutContainer,
   Heading,
@@ -21,16 +22,13 @@ import {
   Name,
   Address,
   Phone,
-  FormContainer,
-  Input,
-  SendBtn,
 } from "./StyledComponents";
 
 import { RiSingleQuotesR } from "react-icons/ri";
 import { ReactTyped } from "react-typed";
 import { FaPhone } from "react-icons/fa6";
 import { FaAddressBook } from "react-icons/fa";
-import { MdOutlineArrowOutward } from "react-icons/md";
+
 const values = [
   {
     heading: "Faith",
@@ -63,10 +61,6 @@ const values = [
 ];
 
 const About = () => {
-  const [send, handleSend] = useState(false);
-  const [message, setMessage] = useState("");
-  const [messgeErr, handleErr] = useState(false);
-  const [action, setAction] = useState(false);
   useEffect(() => {
     const btn = document.querySelector(".sub");
     btn.onmousemove = function (e) {
@@ -76,24 +70,6 @@ const About = () => {
       btn.style.setProperty("--y", y + "px");
     };
   }, []);
-
-  const clickSend = () => {
-    setAction(true);
-    if (message === "") {
-      handleErr(true);
-    }
-  };
-
-  const onChangeMessage = (event) => {
-    setMessage(event.target.value);
-
-    if (event.target.value === "") {
-      handleSend(false);
-    } else {
-      handleSend(true);
-      handleErr(false);
-    }
-  };
 
   return (
     <HandlerContext.Consumer>
@@ -218,62 +194,25 @@ const About = () => {
                   />
                 </Phone>
               </DetailsContentContainer>
-              <FormContainer
-                action="mailto:agastinmellimi2001@gmail.com"
-                method="post"
-                onSubmit={(e) => {
-                  if (action === false) {
-                    e.preventDefault();
-                  }
+
+              <a
+                href="mailto:agastinmellimi2001@gmail.com"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  textDecoration: "none",
+                  color: "#c7b636",
+                  fontSize: "20px",
+                  fontWeight: 600,
+                  marginTop: "20px",
+                  fontFamily: "'Pathway Extreme', sans-serif",
                 }}
+                className="link"
               >
-                <div>
-                  {messgeErr && (
-                    <p
-                      style={{
-                        margin: 0,
-                        color: "#fc9fb0",
-                        fontSize: "12px",
-                        wordBreak: "break-all",
-                        fontFamily: "'Pathway Extreme', sans-serif",
-                      }}
-                    >
-                      Please fill the message
-                    </p>
-                  )}
-                  <Input
-                    $err={messgeErr}
-                    onKeyUp={(e) => {
-                      if (e.key === "Enter") {
-                        setAction(false);
-                      } else {
-                        setAction(true);
-                      }
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        setAction(false);
-                      } else {
-                        setAction(true);
-                      }
-                    }}
-                    type="text"
-                    value={message}
-                    onChange={onChangeMessage}
-                    name="Message"
-                    placeholder="message.."
-                  />
-                </div>
-                <SendBtn
-                  $mode={lightMode}
-                  onClick={clickSend}
-                  className="send-btn"
-                  type={send ? "submit" : "button"}
-                >
-                  Send
-                  <MdOutlineArrowOutward className="icon" />
-                </SendBtn>
-              </FormContainer>
+                <SiMaildotcom style={{ marginRight: "5px" }} />
+                Send Mail
+              </a>
             </DetailsContainer>
             <p
               style={{

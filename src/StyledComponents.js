@@ -24,8 +24,8 @@ export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 25px;
-  overflow: auto !important;
-  height: 90vh;
+  overflow: auto;
+  height: 91vh;
   flex-grow: 1;
   padding-bottom: 30px;
   @media (max-width: 767px) {

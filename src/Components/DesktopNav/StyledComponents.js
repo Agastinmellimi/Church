@@ -5,6 +5,7 @@ export const NavContainer = styled.nav`
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
+  overflow: auto;
 `;
 
 export const WebsiteLogo = styled.h1`
