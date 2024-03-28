@@ -268,9 +268,10 @@ const StudentDeatils = () => {
                   label={{
                     dataKey: "name",
                     position: "insideUp",
-                    stroke: "#ffffff",
-                    strokeWidth: 0.5,
+                    fontFamily: "'Pathway Extreme', sans-serif",
+                    fill: "#ffffff",
                     letterSpacing: "0.20em",
+                    fontWeight: 600,
                     fontSize: "13px",
                   }}
                   background={{
