@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const SideBarContainer = styled.div`
   width: 50px;
-  background-color: ${(props) => (props.$mode ? "#ffffff" : "#262626")};
+  background-color: ${(props) => (props.$mode ? "#ffffff" : "#141414")};
   transition: all 0.3s ease-in-out;
   display: block;
   @media (max-width: 568px) {
     display: none;
   }
   flex-shrink: 0;
+  overflow: auto;
 `;
 
 export const SideOptionsContainer = styled.ul`

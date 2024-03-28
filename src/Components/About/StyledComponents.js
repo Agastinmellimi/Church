@@ -261,6 +261,7 @@ export const List = styled.li`
   border-radius: 15px;
   padding: 10px 15px;
   width: 300px;
+
   text-overflow: ellipsis;
   @media (max-width: 768px) {
     width: 100%;
