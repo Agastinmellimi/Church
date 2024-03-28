@@ -68,19 +68,24 @@ export const BannerImageContainer = styled.div`
       : "linear-gradient(to top, #e14fad 0%, #f9d423 100%)"};
   overflow: hidden;
 
-  @media (min-width: 600px) and (max-width: 700px) {
+  @media (min-width: 599px) and (max-width: 700px) {
     transform: translate(70%, -50%) translateY(60%);
     width: 40%;
     height: 240px;
   }
   @media (min-width: 500px) and (max-width: 599px) {
-    transform: translate(55%, -50%) translateY(60%);
-    width: 44%;
+    transform: translate(50%, -50%) translateY(60%);
+    width: 50%;
     height: 240px;
   }
-  @media (min-width: 300px) and (max-width: 499px) {
-    transform: translate(60%, -50%) translateY(80%);
-    width: 45%;
+  @media (min-width: 299px) and (max-width: 428px) {
+    transform: translate(40%, -50%) translateY(80%);
+    width: 55%;
+    height: 180px;
+  }
+  @media (min-width: 428px) and (max-width: 499px) {
+    transform: translate(49%, -50%) translateY(80%);
+    width: 50%;
     height: 180px;
   }
   @media (max-width: 299px) {
