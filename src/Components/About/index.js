@@ -182,7 +182,7 @@ const About = () => {
                 <Name>Pastor . M. Christopher Garu</Name>
                 <Address>
                   <FaAddressBook style={{ marginRight: "7px" }} />
-                  Patha Kota, Kanaseema dist, Andhra Pradesh
+                  Patha Kota, Konaseema dist, Andhra Pradesh
                 </Address>
                 <Phone>
                   <FaPhone style={{ marginRight: "7px" }} />
