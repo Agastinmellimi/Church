@@ -30,7 +30,7 @@ const Navbar = () => (
           <WebsiteLogo $mode={lightMode}>
             <span
               style={{
-                color: lightMode ? "#e8c31e" : "#e3f76f",
+                color: lightMode ? "#e88f46" : "#7674fc",
               }}
             >
               L

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import HandlerContext from "../../Context/HandlerContext";
 import { TypeAnimation } from "react-type-animation";
 import { ImQuotesLeft } from "react-icons/im";
+import { BsFillCaretRightFill } from "react-icons/bs";
 
 import {
   HomeViewContainer,
@@ -88,7 +89,15 @@ const HomeView = () => {
                   }}
                   className="btn"
                 >
-                  <span>About Us</span>
+                  <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    About Us <BsFillCaretRightFill className="navigate" />
+                  </span>
                 </button>
               </div>
             </BannerContainer>

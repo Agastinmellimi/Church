@@ -7,11 +7,9 @@ export const HomeViewContainer = styled.div`
 
 export const BannerContainer = styled.div`
   border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
-    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
-    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
-    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
-    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset,
+    rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
   height: 320px;
   overflow: auto;
   display: flex;
@@ -19,7 +17,7 @@ export const BannerContainer = styled.div`
   justify-content: center;
   background-image: ${(props) =>
     props.$mode
-      ? "url('https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711176062/qzp8efk2n53tqxf9ooax.jpg')"
+      ? "url('https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711198245/iz9jm3cslu0idrbxtwki.jpg')"
       : "url('https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711124973/irqyewg7rx1cq3tnzpnc.jpg')"};
   background-size: cover;
   background-repeat: no-repeat;
@@ -31,8 +29,13 @@ export const Heading = styled.h2`
   font-family: "Potta One", system-ui;
 
   margin-top: 0;
-  background-color: #85ffbd;
-  background-image: linear-gradient(45deg, #85ffbd 0%, #fffb7d 100%);
+  background-color: #046782;
+  background-image: linear-gradient(
+    90deg,
+    #046782 0%,
+    #03ab91 50%,
+    #4fef9b 100%
+  );
 
   width: 90%;
   align-self: center;

@@ -108,7 +108,7 @@ const Attendance = () => {
       } else {
         setApiResponseData((prev) => ({
           ...prev,
-          childrenStatus: apiStatus.failure,
+          allChildrenListApiStatus: apiStatus.failure,
         }));
       }
     } catch (err) {
@@ -990,7 +990,6 @@ const Attendance = () => {
                       slots={{
                         toolbar: false,
                       }}
-                      views={["year", "month", "day"]}
                       color="primary"
                       onChange={onChangeDateValue}
                       slotProps={{
