@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  background-color: ${(props) => (props.$mode ? "#ffffff" : "#141414")};
+  background-color: ${(props) => (props.$mode ? "#fafafa" : "#141414")};
   transition: all 0.3s ease-in-out;
 `;
 
@@ -25,10 +25,19 @@ export const ContentContainer = styled.div`
   flex-direction: column;
   padding: 20px 25px;
   overflow: auto;
+
   height: 91vh;
   flex-grow: 1;
   padding-bottom: 30px;
   @media (max-width: 767px) {
     padding: 15px 20px;
   }
+  transition: box-shadow 0.3s ease-in-out;
+
+  box-shadow: ${(props) =>
+    props.$mode
+      ? `rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset`
+      : `rgba(59, 59, 59, 0.25) 0px 30px 60px -12px inset,
+    rgba(78, 78, 78, 0.3) 0px 18px 36px -18px inset`};
 `;

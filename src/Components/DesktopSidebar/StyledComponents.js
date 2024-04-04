@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const SideBarContainer = styled.div`
-  width: 50px;
-  background-color: ${(props) => (props.$mode ? "#ffffff" : "#141414")};
+  width: 55px;
+  background-color: ${(props) => (props.$mode ? "#fafafa" : "#141414")};
   transition: all 0.3s ease-in-out;
   display: block;
   @media (max-width: 568px) {

@@ -8,6 +8,7 @@ import { MdSignalWifiStatusbarNotConnected } from "react-icons/md";
 import { MutatingDots } from "react-loader-spinner";
 
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoMdAdd } from "react-icons/io";
 import {
   ComposedChart,
   Bar,
@@ -49,6 +50,8 @@ const StudentDeatils = () => {
     max: null,
     min: null,
     childPresent: "",
+    score: null,
+    scoreErr: false,
   });
 
   const getChildrenData = async (id) => {
@@ -99,8 +102,41 @@ const StudentDeatils = () => {
     }
   };
 
+  const getExamScores = async (id) => {
+    try {
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const url = "https://lordjesus.onrender.com/children-scores";
+      const response = await fetch(url, options);
+      const responsedData = await response.json();
+      if (response.ok) {
+        console.log(responsedData);
+        setApiResponsedData((prev) => ({
+          ...prev,
+          scoreErr: false,
+          score: responsedData.find((item) => item.id === parseInt(id)).score,
+        }));
+      } else {
+        setApiResponsedData((prev) => ({
+          ...prev,
+          scoreErr: true,
+        }));
+      }
+    } catch (err) {
+      setApiResponsedData((prev) => ({
+        ...prev,
+        scoreErr: true,
+      }));
+    }
+  };
+
   useEffect(() => {
     getChildrenData(id);
+    getExamScores(id);
   }, [id]);
 
   const statusLine = () => {
@@ -342,6 +378,30 @@ const StudentDeatils = () => {
                 }}
               >
                 {apiResponsedData.childPresent * 10}
+              </Score>
+              <Score
+                style={{
+                  alignSelf: "center",
+                  color: lightMode
+                    ? "rgba(85, 83, 83, 0.529)"
+                    : "rgba(219, 219, 219, 0.27000001072883606)",
+                  padding: 0,
+                  margin: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <IoMdAdd
+                  style={{
+                    color: lightMode
+                      ? "rgba(85, 83, 83, 0.529)"
+                      : "rgba(219, 219, 219, 0.27000001072883606)",
+                  }}
+                  className="plus"
+                />
+                {apiResponsedData.score}
               </Score>
             </ScoreContainer>
           </StudentDetailsContainer>
