@@ -380,7 +380,8 @@ const Attendance = () => {
                   animation="wave"
                   key={uuidv4()}
                   sx={{
-                    bgcolor: "rgba(219, 219, 219, 0.27000001072883606)",
+                    bgcolor:
+                      !lightMode && "rgba(219, 219, 219, 0.27000001072883606)",
                     borderRadius: "5px",
                     marginBottom: "5px",
                   }}
@@ -397,7 +398,8 @@ const Attendance = () => {
                 height="20px"
                 animation="wave"
                 sx={{
-                  bgcolor: "rgba(219, 219, 219, 0.27000001072883606)",
+                  bgcolor:
+                    !lightMode && "rgba(219, 219, 219, 0.27000001072883606)",
                   borderRadius: "3px 8px 3px 8px",
                   marginBottom: "30px",
                 }}
@@ -408,7 +410,8 @@ const Attendance = () => {
                 height="70px"
                 animation="wave"
                 sx={{
-                  bgcolor: "rgba(219, 219, 219, 0.27000001072883606)",
+                  bgcolor:
+                    !lightMode && "rgba(219, 219, 219, 0.27000001072883606)",
                   borderRadius: "5px",
                   marginBottom: "6px",
                 }}

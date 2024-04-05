@@ -18,9 +18,9 @@ export const FlexContainer = styled.div`
 export const ContentContainer = styled.div`
   background-color: ${(props) => (props.$mode ? "#f0f1f2" : "#1c1b1b")};
 
-  border-top-left-radius: 20px;
+  border-top-left-radius: 10px;
   transition: all 0.3s ease-in-out;
-  border-top-right-radius: 20px;
+  border-top-right-radius: 10px;
   display: flex;
   flex-direction: column;
   padding: 20px 25px;
@@ -39,5 +39,5 @@ export const ContentContainer = styled.div`
       ? `rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset`
       : `rgba(59, 59, 59, 0.25) 0px 30px 60px -12px inset,
-    rgba(78, 78, 78, 0.3) 0px 18px 36px -18px inset`};
+      rgba(59, 59, 59, 0.25) 0px 18px 36px -18px inset`};
 `;

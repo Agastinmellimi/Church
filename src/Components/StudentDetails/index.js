@@ -6,9 +6,10 @@ import { IoArrowRedoSharp } from "react-icons/io5";
 import { VscBracketError } from "react-icons/vsc";
 import { MdSignalWifiStatusbarNotConnected } from "react-icons/md";
 import { MutatingDots } from "react-loader-spinner";
-
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoMdAdd } from "react-icons/io";
+import { SemiCircleProgress } from "react-semicircle-progressbar";
+
 import {
   ComposedChart,
   Bar,
@@ -43,6 +44,11 @@ const apiStatus = {
 const StudentDeatils = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [windowWidth, setWidth] = useState(window.innerWidth);
+  const [scoreBar, handleHeight] = useState({
+    height: "",
+    width: "",
+  });
   const [apiResponsedData, setApiResponsedData] = useState({
     childApiStatus: apiStatus.initial,
     childrenData: [],
@@ -51,8 +57,37 @@ const StudentDeatils = () => {
     min: null,
     childPresent: "",
     score: null,
-    scoreErr: false,
+
+    scoreStatus: apiStatus.initial,
   });
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setWidth(window.innerWidth);
+    });
+
+    if (windowWidth > 768) {
+      handleHeight({
+        height: 300,
+        width: 300,
+      });
+    } else if (windowWidth >= 568 && windowWidth < 768) {
+      handleHeight({
+        height: 220,
+        width: 220,
+      });
+    } else if (windowWidth >= 300 && windowWidth < 568) {
+      handleHeight({
+        height: 140,
+        width: 140,
+      });
+    } else {
+      handleHeight({
+        height: 100,
+        width: 100,
+      });
+    }
+  }, [windowWidth]);
 
   const getChildrenData = async (id) => {
     setApiResponsedData((prev) => ({
@@ -103,6 +138,10 @@ const StudentDeatils = () => {
   };
 
   const getExamScores = async (id) => {
+    setApiResponsedData((prev) => ({
+      ...prev,
+      scoreStatus: apiStatus.inProgress,
+    }));
     try {
       const options = {
         method: "GET",
@@ -117,19 +156,20 @@ const StudentDeatils = () => {
         console.log(responsedData);
         setApiResponsedData((prev) => ({
           ...prev,
-          scoreErr: false,
+          scoreStatus: apiStatus.success,
           score: responsedData.find((item) => item.id === parseInt(id)).score,
         }));
       } else {
         setApiResponsedData((prev) => ({
           ...prev,
-          scoreErr: true,
+
+          scoreStatus: apiStatus.failure,
         }));
       }
     } catch (err) {
       setApiResponsedData((prev) => ({
         ...prev,
-        scoreErr: true,
+        scoreStatus: apiStatus.networkErr,
       }));
     }
   };
@@ -197,6 +237,25 @@ const StudentDeatils = () => {
             </button>
           </div>
         );
+
+        const getPercentage = () => {
+          const { max, childPresent } = apiResponsedData;
+          // switch (childPresent) {
+          //   case max:
+          //     return 100
+          //   case max > childPresent && max - 9 <= childPresent:
+          //     return 90
+          //   case max - 1:
+          //     return 99
+          //   case parseInt(max/2):
+          //     return 50
+          //   case min:
+          //     return
+          //   default:
+          //     return 0
+          // }
+          return parseInt((childPresent / max) * 10) * 10;
+        };
 
         const DetailsSuccessView = () => (
           <StudentDetailsContainer>
@@ -360,10 +419,39 @@ const StudentDeatils = () => {
               {statusLine()}
             </StatusLine>
             <ScoreContainer>
-              <ScoreHeading $mode={lightMode}>SCORE</ScoreHeading>
-              <Score
-                style={{
-                  color:
+              <ScoreHeading $mode={lightMode}>Percentage</ScoreHeading>
+
+              <div style={{ alignSelf: "center", marginBottom: 0, padding: 0 }}>
+                <SemiCircleProgress
+                  percentage={getPercentage()}
+                  size={{
+                    width: scoreBar.width,
+                    height: scoreBar.height,
+                  }}
+                  // percentageSeperator=" "
+                  hasBackground={true}
+                  strokeWidth={10}
+                  fontStyle={{
+                    fontFamily: "'Pathway Extreme', sans-serif",
+                    fill:
+                      apiResponsedData.max === apiResponsedData.childPresent
+                        ? lightMode
+                          ? "#18ad56"
+                          : "#38c272"
+                        : apiResponsedData.min === apiResponsedData.childPresent
+                        ? lightMode
+                          ? "#bf4949"
+                          : "#ed6464"
+                        : lightMode
+                        ? "#8225c4"
+                        : "#894de3",
+                  }}
+                  bgStrokeColor={
+                    lightMode
+                      ? "rgba(50, 50, 93, 0.25)"
+                      : "rgba(219, 219, 219, 0.27000001072883606)"
+                  }
+                  strokeColor={
                     apiResponsedData.max === apiResponsedData.childPresent
                       ? lightMode
                         ? "#18ad56"
@@ -374,35 +462,10 @@ const StudentDeatils = () => {
                         : "#ed6464"
                       : lightMode
                       ? "#8225c4"
-                      : "#894de3",
-                }}
-              >
-                {apiResponsedData.childPresent * 10}
-              </Score>
-              <Score
-                style={{
-                  alignSelf: "center",
-                  color: lightMode
-                    ? "rgba(85, 83, 83, 0.529)"
-                    : "rgba(219, 219, 219, 0.27000001072883606)",
-                  padding: 0,
-                  margin: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                <IoMdAdd
-                  style={{
-                    color: lightMode
-                      ? "rgba(85, 83, 83, 0.529)"
-                      : "rgba(219, 219, 219, 0.27000001072883606)",
-                  }}
-                  className="plus"
+                      : "#894de3"
+                  }
                 />
-                {apiResponsedData.score}
-              </Score>
+              </div>
             </ScoreContainer>
           </StudentDetailsContainer>
         );

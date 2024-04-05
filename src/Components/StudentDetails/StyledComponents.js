@@ -98,6 +98,7 @@ export const ScoreHeading = styled.p`
   font-family: "Pathway Extreme", sans-serif;
   font-size: 20px;
   margin-bottom: 0;
+
   color: ${(props) => (props.$mode ? "#ebb70e" : "#f7d565")};
   font-weight: 600;
   @media (max-width: 400px) {
