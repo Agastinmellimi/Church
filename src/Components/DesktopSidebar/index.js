@@ -37,6 +37,7 @@ const DesktopSidebar = () => {
             color: lightMode ? "#fff" : "rgba(0, 0, 0, 0.87)",
             boxShadow: theme.shadows[1],
             fontSize: 15,
+            fontFamily: "'Pathway Extreme', sans-serif",
           },
         }));
         const clickTab = (value) => {

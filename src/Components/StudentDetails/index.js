@@ -7,15 +7,18 @@ import { VscBracketError } from "react-icons/vsc";
 import { MdSignalWifiStatusbarNotConnected } from "react-icons/md";
 import { MutatingDots } from "react-loader-spinner";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { IoMdAdd } from "react-icons/io";
+
 import { SemiCircleProgress } from "react-semicircle-progressbar";
+import { styled } from "@mui/material/styles";
+import Zoom from "@mui/material/Zoom";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 
 import {
   ComposedChart,
   Bar,
   XAxis,
   YAxis,
-  Tooltip,
+  Tooltip as Tool,
   Legend,
   ResponsiveContainer,
 } from "recharts";
@@ -30,7 +33,6 @@ import {
   Button,
   ScoreContainer,
   ScoreHeading,
-  Score,
 } from "./StyledComponents";
 
 const apiStatus = {
@@ -238,6 +240,27 @@ const StudentDeatils = () => {
           </div>
         );
 
+        const LightTooltip = styled(({ className, ...props }) => (
+          <Tooltip {...props} classes={{ popper: className }} />
+        ))(({ theme }) => ({
+          [`& .${tooltipClasses.arrow}`]: {
+            color: lightMode
+              ? theme.palette.common.dark
+              : theme.palette.common.white,
+            fontSize: 8,
+          },
+          [`& .${tooltipClasses.tooltip}`]: {
+            backgroundColor: lightMode
+              ? theme.palette.common.dark
+              : theme.palette.common.white,
+            color: lightMode ? "#fff" : "rgba(0, 0, 0, 0.87)",
+            boxShadow: theme.shadows[1],
+            fontSize: 22,
+            fontFamily: "'Pathway Extreme', sans-serif",
+            // wordBreak: "break-all",
+          },
+        }));
+
         const getPercentage = () => {
           const { max, childPresent } = apiResponsedData;
           // switch (childPresent) {
@@ -346,7 +369,7 @@ const StudentDeatils = () => {
                   stroke={lightMode ? "#147e82" : "#fce683"}
                   strokeWidth={2}
                 />
-                <Tooltip
+                <Tool
                   trigger="hover"
                   cursor={{ fill: "transparent" }}
                   contentStyle={{
@@ -420,20 +443,54 @@ const StudentDeatils = () => {
             </StatusLine>
             <ScoreContainer>
               <ScoreHeading $mode={lightMode}>Percentage</ScoreHeading>
-
-              <div style={{ alignSelf: "center", marginBottom: 0, padding: 0 }}>
-                <SemiCircleProgress
-                  percentage={getPercentage()}
-                  size={{
-                    width: scoreBar.width,
-                    height: scoreBar.height,
+              <LightTooltip
+                title={`${
+                  apiResponsedData.childName.split(" ")[0]
+                } - ${getPercentage()}%`}
+                placement="bottom"
+                TransitionComponent={Zoom}
+                enterDelay={500}
+                leaveDelay={200}
+                arrow
+              >
+                <div
+                  style={{
+                    alignSelf: "center",
+                    marginBottom: 0,
+                    padding: 0,
                   }}
-                  // percentageSeperator=" "
-                  hasBackground={true}
-                  strokeWidth={10}
-                  fontStyle={{
-                    fontFamily: "'Pathway Extreme', sans-serif",
-                    fill:
+                >
+                  <SemiCircleProgress
+                    percentage={getPercentage()}
+                    size={{
+                      width: scoreBar.width,
+                      height: scoreBar.height,
+                    }}
+                    // percentageSeperator=" "
+                    hasBackground={true}
+                    strokeWidth={10}
+                    fontStyle={{
+                      fontFamily: "'Pathway Extreme', sans-serif",
+                      fill:
+                        apiResponsedData.max === apiResponsedData.childPresent
+                          ? lightMode
+                            ? "#18ad56"
+                            : "#38c272"
+                          : apiResponsedData.min ===
+                            apiResponsedData.childPresent
+                          ? lightMode
+                            ? "#bf4949"
+                            : "#ed6464"
+                          : lightMode
+                          ? "#8225c4"
+                          : "#894de3",
+                    }}
+                    bgStrokeColor={
+                      lightMode
+                        ? "rgba(50, 50, 93, 0.25)"
+                        : "rgba(219, 219, 219, 0.27000001072883606)"
+                    }
+                    strokeColor={
                       apiResponsedData.max === apiResponsedData.childPresent
                         ? lightMode
                           ? "#18ad56"
@@ -444,28 +501,11 @@ const StudentDeatils = () => {
                           : "#ed6464"
                         : lightMode
                         ? "#8225c4"
-                        : "#894de3",
-                  }}
-                  bgStrokeColor={
-                    lightMode
-                      ? "rgba(50, 50, 93, 0.25)"
-                      : "rgba(219, 219, 219, 0.27000001072883606)"
-                  }
-                  strokeColor={
-                    apiResponsedData.max === apiResponsedData.childPresent
-                      ? lightMode
-                        ? "#18ad56"
-                        : "#38c272"
-                      : apiResponsedData.min === apiResponsedData.childPresent
-                      ? lightMode
-                        ? "#bf4949"
-                        : "#ed6464"
-                      : lightMode
-                      ? "#8225c4"
-                      : "#894de3"
-                  }
-                />
-              </div>
+                        : "#894de3"
+                    }
+                  />
+                </div>
+              </LightTooltip>
             </ScoreContainer>
           </StudentDetailsContainer>
         );
