@@ -108,7 +108,9 @@ const StudentDeatils = () => {
       const data = await response.json();
 
       if (response.ok) {
-        const child = data.find((item) => item.id === parseInt(id)).name;
+        const child = data.details.find(
+          (item) => item.id === parseInt(id)
+        ).name;
         const formattedName =
           child.split(" ")[0][0] +
           child.split(" ")[0].slice(1).toLocaleLowerCase() +
@@ -118,11 +120,12 @@ const StudentDeatils = () => {
 
         setApiResponsedData((prev) => ({
           ...prev,
-          childrenData: data.filter((item) => item.id === parseInt(id)),
+          childrenData: data.details.filter((item) => item.id === parseInt(id)),
           childName: formattedName,
-          max: Math.max(...data.map((item) => item.presents)),
-          min: Math.min(...data.map((item) => item.presents)),
-          childPresent: data.find((item) => item.id === parseInt(id)).presents,
+          max: data.workingDays,
+          min: Math.min(...data.details.map((item) => item.presents)),
+          childPresent: data.details.find((item) => item.id === parseInt(id))
+            .presents,
           childApiStatus: apiStatus.success,
         }));
       } else {

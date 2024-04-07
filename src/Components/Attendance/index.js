@@ -70,6 +70,7 @@ const Attendance = () => {
     byDateApiStatus: apiStatus.initial,
     byDateErr: "",
     allChildrenDetails: [],
+    days: 0,
     allChildrenListApiStatus: apiStatus.inProgress,
   });
 
@@ -102,7 +103,8 @@ const Attendance = () => {
       if (response.ok) {
         setApiResponseData((prev) => ({
           ...prev,
-          allChildrenDetails: data,
+          allChildrenDetails: data.details,
+          days: data.workingDays,
           allChildrenListApiStatus: apiStatus.success,
         }));
       } else {
@@ -572,9 +574,7 @@ const Attendance = () => {
         );
 
         const getStatusLine = (presents) => {
-          const max = Math.max(
-            ...apiResponsedData.allChildrenDetails.map((item) => item.presents)
-          );
+          const max = apiResponsedData.days;
           const min = Math.min(
             ...apiResponsedData.allChildrenDetails.map((item) => item.presents)
           );
@@ -696,9 +696,7 @@ const Attendance = () => {
         };
 
         const getDefaultImage = (presents) => {
-          const max = Math.max(
-            ...apiResponsedData.allChildrenDetails.map((item) => item.presents)
-          );
+          const max = apiResponsedData.days;
           const min = Math.min(
             ...apiResponsedData.allChildrenDetails.map((item) => item.presents)
           );
@@ -721,22 +719,8 @@ const Attendance = () => {
               <div key={uuidv4()}>
                 <Container
                   $mode={lightMode}
-                  $occur={
-                    Math.max(
-                      ...apiResponsedData.allChildrenDetails.map(
-                        (item) => item.presents
-                      )
-                    ) -
-                      1 ===
-                    item.presents
-                  }
-                  $max={
-                    Math.max(
-                      ...apiResponsedData.allChildrenDetails.map(
-                        (item) => item.presents
-                      )
-                    ) === item.presents
-                  }
+                  $occur={apiResponsedData.days - 1 === item.presents}
+                  $max={apiResponsedData.days === item.presents}
                 >
                   <NameFlexContainer>
                     <ChildImage
@@ -753,22 +737,8 @@ const Attendance = () => {
                       onClick={() => navigate(`/attendance/${item.id}`)}
                       style={{ cursor: "pointer" }}
                       className="name"
-                      $max={
-                        Math.max(
-                          ...apiResponsedData.allChildrenDetails.map(
-                            (item) => item.presents
-                          )
-                        ) === item.presents
-                      }
-                      $occur={
-                        Math.max(
-                          ...apiResponsedData.allChildrenDetails.map(
-                            (item) => item.presents
-                          )
-                        ) -
-                          1 ===
-                        item.presents
-                      }
+                      $max={apiResponsedData.days === item.presents}
+                      $occur={apiResponsedData.days - 1 === item.presents}
                       $mode={lightMode}
                     >
                       {item.name} <MdOutlineArrowOutward className="arrow" />
@@ -778,21 +748,11 @@ const Attendance = () => {
                     style={{
                       width: "100%",
                       border:
-                        Math.max(
-                          ...apiResponsedData.allChildrenDetails.map(
-                            (item) => item.presents
-                          )
-                        ) === item.presents
+                        apiResponsedData.days === item.presents
                           ? lightMode
-                            ? "1.5px solid #07a631"
-                            : "1.5px solid #63f298"
-                          : Math.max(
-                              ...apiResponsedData.allChildrenDetails.map(
-                                (item) => item.presents
-                              )
-                            ) -
-                              1 ===
-                            item.presents
+                            ? "1.2px solid #07a631"
+                            : "1.2px solid #63f298"
+                          : apiResponsedData.days - 1 === item.presents
                           ? lightMode
                             ? "1.5px solid #BE861A"
                             : "1.5px solid #F5CA77"
@@ -800,35 +760,15 @@ const Attendance = () => {
                     }}
                   />
                   <Presents
-                    $max={
-                      Math.max(
-                        ...apiResponsedData.allChildrenDetails.map(
-                          (item) => item.presents
-                        )
-                      ) === item.presents
-                    }
-                    $occur={
-                      Math.max(
-                        ...apiResponsedData.allChildrenDetails.map(
-                          (item) => item.presents
-                        )
-                      ) -
-                        1 ===
-                      item.presents
-                    }
+                    $max={apiResponsedData.days === item.presents}
+                    $occur={apiResponsedData.days - 1 === item.presents}
                     $mode={lightMode}
                   >
                     presents: {item.presents}
                   </Presents>
                   <WishLineContainer>
                     <WishLine
-                      $max={
-                        Math.max(
-                          ...apiResponsedData.allChildrenDetails.map(
-                            (item) => item.presents
-                          )
-                        ) === item.presents
-                      }
+                      $max={apiResponsedData.days === item.presents}
                       $min={
                         Math.min(
                           ...apiResponsedData.allChildrenDetails.map(
@@ -836,15 +776,7 @@ const Attendance = () => {
                           )
                         ) === item.presents
                       }
-                      $occur={
-                        Math.max(
-                          ...apiResponsedData.allChildrenDetails.map(
-                            (item) => item.presents
-                          )
-                        ) -
-                          1 ===
-                        item.presents
-                      }
+                      $occur={apiResponsedData.days - 1 === item.presents}
                       $mode={lightMode}
                     >
                       {getStatusLine(item.presents)}
@@ -852,19 +784,9 @@ const Attendance = () => {
 
                     <img
                       alt={
-                        Math.max(
-                          ...apiResponsedData.allChildrenDetails.map(
-                            (item) => item.presents
-                          )
-                        ) === item.presents
+                        apiResponsedData.days === item.presents
                           ? "max"
-                          : Math.max(
-                              ...apiResponsedData.allChildrenDetails.map(
-                                (item) => item.presents
-                              )
-                            ) -
-                              1 ===
-                            item.presents
+                          : apiResponsedData.days - 1 === item.presents
                           ? "occur"
                           : "keep go"
                       }
