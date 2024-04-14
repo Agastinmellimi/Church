@@ -280,7 +280,7 @@ const StudentDeatils = () => {
           //   default:
           //     return 0
           // }
-          return parseInt((childPresent / max) * 10) * 10;
+          return parseInt((childPresent / max) * 10 * 10);
         };
 
         const DetailsSuccessView = () => (
@@ -295,11 +295,11 @@ const StudentDeatils = () => {
                         ? lightMode
                           ? "#18ad56"
                           : "#38c272"
-                        : apiResponsedData.childPresent ===
-                          apiResponsedData.max - 1
+                        : apiResponsedData.max - 1 ===
+                          apiResponsedData.childPresent
                         ? lightMode
-                          ? "#b2d117"
-                          : "#cae34d"
+                          ? "#d47531"
+                          : "#d47531"
                         : apiResponsedData.childPresent === apiResponsedData.min
                         ? lightMode
                           ? "#e62c3b"
@@ -404,6 +404,11 @@ const StudentDeatils = () => {
                       ? lightMode
                         ? "#18ad56"
                         : "#38c272"
+                      : apiResponsedData.max - 1 ===
+                        apiResponsedData.childPresent
+                      ? lightMode
+                        ? "#d47531"
+                        : "#d47531"
                       : apiResponsedData.min === apiResponsedData.childPresent
                       ? lightMode
                         ? "#bf4949"
@@ -479,6 +484,11 @@ const StudentDeatils = () => {
                           ? lightMode
                             ? "#18ad56"
                             : "#38c272"
+                          : apiResponsedData.max - 1 ===
+                            apiResponsedData.childPresent
+                          ? lightMode
+                            ? "#d47531"
+                            : "#d47531"
                           : apiResponsedData.min ===
                             apiResponsedData.childPresent
                           ? lightMode
@@ -498,6 +508,11 @@ const StudentDeatils = () => {
                         ? lightMode
                           ? "#18ad56"
                           : "#38c272"
+                        : apiResponsedData.max - 1 ===
+                          apiResponsedData.childPresent
+                        ? lightMode
+                          ? "#d47531"
+                          : "#d47531"
                         : apiResponsedData.min === apiResponsedData.childPresent
                         ? lightMode
                           ? "#bf4949"
