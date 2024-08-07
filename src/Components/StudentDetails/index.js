@@ -58,7 +58,6 @@ const StudentDeatils = () => {
     max: null,
     min: null,
     childPresent: "",
-    score: null,
 
     scoreStatus: apiStatus.initial,
   });
@@ -97,7 +96,7 @@ const StudentDeatils = () => {
       childApiStatus: apiStatus.inProgress,
     }));
     try {
-      const url = "https://lordjesus.onrender.com/attendance-details";
+      const url = "https://church-backend-k1y9.onrender.com/attendance-details";
       const options = {
         method: "GET",
         headers: {
@@ -142,46 +141,8 @@ const StudentDeatils = () => {
     }
   };
 
-  const getExamScores = async (id) => {
-    setApiResponsedData((prev) => ({
-      ...prev,
-      scoreStatus: apiStatus.inProgress,
-    }));
-    try {
-      const options = {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const url = "https://lordjesus.onrender.com/children-scores";
-      const response = await fetch(url, options);
-      const responsedData = await response.json();
-      if (response.ok) {
-        console.log(responsedData);
-        setApiResponsedData((prev) => ({
-          ...prev,
-          scoreStatus: apiStatus.success,
-          score: responsedData.find((item) => item.id === parseInt(id)).score,
-        }));
-      } else {
-        setApiResponsedData((prev) => ({
-          ...prev,
-
-          scoreStatus: apiStatus.failure,
-        }));
-      }
-    } catch (err) {
-      setApiResponsedData((prev) => ({
-        ...prev,
-        scoreStatus: apiStatus.networkErr,
-      }));
-    }
-  };
-
   useEffect(() => {
     getChildrenData(id);
-    getExamScores(id);
   }, [id]);
 
   const statusLine = () => {
@@ -280,7 +241,8 @@ const StudentDeatils = () => {
           //   default:
           //     return 0
           // }
-          return parseInt((childPresent / max) * 10 * 10);
+
+          return parseInt((childPresent / max) * 100); //changed
         };
 
         const DetailsSuccessView = () => (

@@ -182,7 +182,7 @@ export const ByDateDetailsContainer = styled.div`
   flex-direction: row;
 
   width: 100%;
-
+  margin-bottom: 20px;
   justify-content: space-between;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;

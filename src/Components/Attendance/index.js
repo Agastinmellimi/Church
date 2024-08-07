@@ -91,7 +91,7 @@ const Attendance = () => {
       allChildrenListApiStatus: apiStatus.inProgress,
     }));
     try {
-      const url = "https://lordjesus.onrender.com/attendance-details";
+      const url = "https://church-backend-k1y9.onrender.com/attendance-details";
       const options = {
         method: "GET",
         headers: {
@@ -641,7 +641,7 @@ const Attendance = () => {
             }));
             try {
               const attendanceUrl =
-                "https://lordjesus.onrender.com/date-attendance";
+                "https://church-backend-k1y9.onrender.com/date-attendance";
 
               const dateOject = {
                 date: dateValue,
@@ -656,6 +656,7 @@ const Attendance = () => {
               };
               const response = await fetch(attendanceUrl, options);
               const data = await response.json();
+
               if (response.ok) {
                 setApiResponseData((prev) => ({
                   ...prev,
@@ -931,6 +932,7 @@ const Attendance = () => {
                 )}
               </DateCalenderContainer>
             </ByDateDetailsContainer>
+
             {cleared && (
               <Alert
                 icon={
