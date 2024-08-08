@@ -218,20 +218,15 @@ const About = () => {
               style={{
                 fontFamily: "'Pathway Extreme', sans-serif",
                 textAlign: "center",
-                marginTop: "10px",
+                marginTop: "auto",
                 fontSize: "15px",
-                marginBottom: "auto",
+
                 color: lightMode ? "#989c9b" : "#b1b5b4",
               }}
             >
               Designed by @
               <strong style={{ color: lightMode ? "#0a6144" : "#7cfcab" }}>
-                <ReactTyped
-                  strings={["Agastinmellimi", "Chintu"]}
-                  loop
-                  typeSpeed={130}
-                  backSpeed={130}
-                />
+                Agastin
               </strong>
             </p>
           </AboutContainer>

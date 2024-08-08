@@ -60,24 +60,7 @@ const HomeView = () => {
                 className="typer"
                 repeat={Infinity}
               />
-              {/* <TypeAnimation
-            sequence={[
-              // Same substring at the start will only be typed once, initially
-              "Pastor M. Christopher garu.\nPath Kota,\nKonaseema district.\nAndhra Pradesh - 533306",
-              2000,
-              "",
-            ]}
-            style={{
-              whiteSpace: "pre-line",
-              height: "195px",
-              display: "block",
-            }}
-            speed={20}
-            wrapper="span"
-            cursor={true}
-            className="typer-information"
-            repeat={Infinity}
-          /> */}
+
               <div style={{ width: "90%", alignSelf: "center" }}>
                 <button
                   onClick={clickAbout}

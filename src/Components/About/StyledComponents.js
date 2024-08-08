@@ -332,6 +332,7 @@ export const DetailsContainer = styled.div`
   padding: 10px 20px;
   display: flex;
   align-items: flex-start;
+  margin-bottom: 15px;
   justify-content: space-between;
   flex-wrap: wrap;
   overflow: auto;
