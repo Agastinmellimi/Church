@@ -149,7 +149,6 @@ const Attendance = () => {
           slidesToScroll: 3,
           className: "slider",
           infinite: false,
-
           dotsClass: "slick-dots",
           arrows: false,
           dots: true,
@@ -270,8 +269,11 @@ const Attendance = () => {
         const ByDateAttendanceDeailsSuccessView = () => (
           <>
             {date === null ? null : (
-              <DateShow $mode={lightMode}>
-                {">>"} {getEnglishMonthName(date.$M + 1)} {date.$D}th {date.$y}{" "}
+              <DateShow
+                $mode={lightMode}
+                style={{ display: "flex", flexWrap: "wrap" }}
+              >
+                📅 {getEnglishMonthName(date.$M + 1)} {date.$D}th {date.$y}{" "}
                 attendance details
               </DateShow>
             )}
