@@ -636,7 +636,7 @@ const Attendance = () => {
           if (value !== null) {
             const dateValue = `${value.$y}-${
               value.$M + 1 < 10 ? `0${value.$M + 1}` : value.$M
-            }-${value.$D + 1 < 10 ? `0${value.$D}` : value.$D}`;
+            }-${value.$D < 10 ? `0${value.$D}` : value.$D}`;
             setApiResponseData((prev) => ({
               ...prev,
               byDateApiStatus: apiStatus.inProgress,
@@ -648,6 +648,8 @@ const Attendance = () => {
               const dateOject = {
                 date: dateValue,
               };
+
+              console.log(dateOject, dateValue);
 
               const options = {
                 method: "POST",
