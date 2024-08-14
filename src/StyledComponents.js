@@ -20,7 +20,7 @@ export const ContentContainer = styled.div`
 
   border-top-left-radius: 10px;
   transition: all 0.3s ease-in-out;
-  border-top-right-radius: 10px;
+
   display: flex;
   flex-direction: column;
   padding: 20px 25px;
@@ -28,9 +28,10 @@ export const ContentContainer = styled.div`
 
   height: 91vh;
   flex-grow: 1;
-  padding-bottom: 30px;
+
   @media (max-width: 767px) {
     padding: 15px 20px;
+    border-top-right-radius: 10px;
   }
   transition: box-shadow 0.3s ease-in-out;
 
