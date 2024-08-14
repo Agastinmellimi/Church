@@ -247,6 +247,17 @@ const StudentDeatils = () => {
 
         const DetailsSuccessView = () => (
           <StudentDetailsContainer>
+            {apiResponsedData.childrenData[0].image === null ? null : (
+              <img
+                style={{
+                  width: "120px",
+                  height: "120px",
+                  borderRadius: "8px",
+                }}
+                src={apiResponsedData.childrenData[0].image}
+                alt={apiResponsedData.childrenData.name}
+              />
+            )}
             <WishNameContainer>
               <WishName $mode={lightMode}>
                 Hi{" "}

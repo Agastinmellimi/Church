@@ -14,14 +14,14 @@ export const Container = styled.div`
   flex-direction: column;
   border-radius: 5px;
   flex-shrink: 0;
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 
     opacity: 0.8;
     &:hover {
       opacity: 1;
     }
-  }
+  } */
   ${(props) =>
     props.$max &&
     `
@@ -73,6 +73,7 @@ export const ChildImage = styled.img`
   width: 50px;
   height: 50px;
   margin-right: 20px;
+  border-radius: 50%;
   transition: transform 0.4s ease-in-out;
   &:hover {
     transform: scale(1.05);
@@ -364,6 +365,7 @@ export const Name = styled.p`
   font-weight: 300;
   font-size: 15px;
   word-break: break-word;
+
   @media (min-width: 768px) and (max-width: 969px) {
     font-size: 13px;
   }

@@ -18,6 +18,8 @@ import { VscBracketError } from "react-icons/vsc";
 import { ReactTyped } from "react-typed";
 import { MdOutlineArrowOutward } from "react-icons/md";
 
+import ChildrenNames from "../ChildrenNames";
+
 import {
   AttendanceContainer,
   Container,
@@ -198,8 +200,7 @@ const Attendance = () => {
                       width={55}
                       height={55}
                       sx={{
-                        backgroundColor:
-                          "rgba(219, 219, 219, 0.27000001072883606)",
+                        backgroundColor: "rgba(102, 101, 101, 0.355)",
                         marginRight: 2,
                       }}
                     />
@@ -209,8 +210,7 @@ const Attendance = () => {
                       width="70%"
                       height={15}
                       sx={{
-                        backgroundColor:
-                          "rgba(219, 219, 219, 0.27000001072883606)",
+                        backgroundColor: "rgba(102, 101, 101, 0.355)",
                         borderRadius: 2,
                       }}
                     />
@@ -218,8 +218,7 @@ const Attendance = () => {
                   <hr
                     style={{
                       width: "100%",
-                      border:
-                        "2px solid rgba(219, 219, 219, 0.27000001072883606)",
+                      border: "rgba(102, 101, 101, 0.355)",
                     }}
                   />
                   <Skeleton
@@ -228,8 +227,7 @@ const Attendance = () => {
                     width="60%"
                     height={17}
                     sx={{
-                      backgroundColor:
-                        "rgba(219, 219, 219, 0.27000001072883606)",
+                      backgroundColor: "rgba(102, 101, 101, 0.355)",
                       borderRadius: 2.3,
                       marginBottom: 2.2,
                       marginTop: 1,
@@ -241,8 +239,7 @@ const Attendance = () => {
                     width="100%"
                     height={17}
                     sx={{
-                      backgroundColor:
-                        "rgba(219, 219, 219, 0.27000001072883606)",
+                      backgroundColor: "rgba(102, 101, 101, 0.355)",
                       borderRadius: 2,
                       marginBottom: 1,
                     }}
@@ -384,8 +381,7 @@ const Attendance = () => {
                   animation="wave"
                   key={uuidv4()}
                   sx={{
-                    bgcolor:
-                      !lightMode && "rgba(219, 219, 219, 0.27000001072883606)",
+                    bgcolor: "rgba(102, 101, 101, 0.355)",
                     borderRadius: "5px",
                     marginBottom: "5px",
                   }}
@@ -402,8 +398,7 @@ const Attendance = () => {
                 height="20px"
                 animation="wave"
                 sx={{
-                  bgcolor:
-                    !lightMode && "rgba(219, 219, 219, 0.27000001072883606)",
+                  bgcolor: "rgba(102, 101, 101, 0.355)",
                   borderRadius: "3px 8px 3px 8px",
                   marginBottom: "30px",
                 }}
@@ -414,8 +409,7 @@ const Attendance = () => {
                 height="70px"
                 animation="wave"
                 sx={{
-                  bgcolor:
-                    !lightMode && "rgba(219, 219, 219, 0.27000001072883606)",
+                  bgcolor: "rgba(102, 101, 101, 0.355)",
                   borderRadius: "5px",
                   marginBottom: "6px",
                 }}
@@ -649,8 +643,6 @@ const Attendance = () => {
                 date: dateValue,
               };
 
-              console.log(dateOject, dateValue);
-
               const options = {
                 method: "POST",
                 headers: {
@@ -733,9 +725,11 @@ const Attendance = () => {
                       style={{ cursor: "pointer" }}
                       alt={item.name.split(" ")[0]}
                       src={
-                        item.gender === "MALE"
-                          ? "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1710924465/ibuhzyczyszmehs4qbu3.png"
-                          : "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1706681443/uybys3x9m2u9rvm2wiiz.png"
+                        item.image === null
+                          ? item.gender === "MALE"
+                            ? "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1710924465/ibuhzyczyszmehs4qbu3.png"
+                            : "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1706681443/uybys3x9m2u9rvm2wiiz.png"
+                          : item.image
                       }
                     />
                     <ChildName
@@ -936,6 +930,8 @@ const Attendance = () => {
                 )}
               </DateCalenderContainer>
             </ByDateDetailsContainer>
+
+            <ChildrenNames />
 
             {cleared && (
               <Alert
