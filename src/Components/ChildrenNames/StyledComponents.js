@@ -80,7 +80,7 @@ export const ChildrenName = styled.p`
 
   flex-grow: 1;
   line-height: 25px;
-
+  word-break: break-word;
   font-weight: 500;
   letter-spacing: 0.03em;
   @media (max-width: 700px) {
@@ -102,4 +102,31 @@ export const Paragraph = styled.p`
   align-self: center;
   text-align: center;
   word-break: break-word;
+`;
+
+export const NameFlexContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-overflow: ellipsis;
+  align-self: flex-start;
+  flex-grow: 1;
+  @media (max-width: 400px) {
+    width: 100%;
+  }
+`;
+
+export const RollNo = styled.p`
+  font-family: "Edu AU VIC WA NT Hand", cursive;
+  font-weight: 600;
+  margin-left: auto;
+  border: ${(props) =>
+    props.$mode ? "1.5px solid #212121" : "1.5px solid #dcdedd"};
+  border-radius: 50%;
+  padding: 5px 10px;
+  color: ${(props) => (props.$mode ? "#212121" : "#dcdedd")};
+  @media (max-width: 400px) {
+    align-self: flex-end;
+  }
 `;

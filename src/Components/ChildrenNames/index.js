@@ -12,6 +12,8 @@ import {
   ImageChildren,
   ChildrenName,
   Paragraph,
+  NameFlexContainer,
+  RollNo,
 } from "./StyledComponents";
 
 const apiStatus = {
@@ -200,7 +202,10 @@ const ChildrenNames = () => {
                 : item.image
             }
           />
-          <ChildrenName $mode={lightMode}>{item.name}</ChildrenName>
+          <NameFlexContainer>
+            <ChildrenName $mode={lightMode}>{item.name}</ChildrenName>
+            <RollNo $mode={lightMode}>{item.id}</RollNo>
+          </NameFlexContainer>
         </Children>
       ))}
     </ChildrensListContainer>

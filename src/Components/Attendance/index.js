@@ -8,7 +8,7 @@ import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import Slider from "react-slick";
 import Skeleton from "@mui/material/Skeleton";
 import HandlerContext from "../../Context/HandlerContext";
-import { GrPrevious, GrNext } from "react-icons/gr";
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
@@ -152,10 +152,14 @@ const Attendance = () => {
           className: "slider",
           infinite: false,
           dotsClass: "slick-dots",
-          arrows: false,
+          arrows: true,
           dots: true,
-          prevArrow: <GrPrevious color={lightMode ? "#78db5a" : "#47b1cc"} />,
-          nextArrow: <GrNext color={lightMode ? "#78db5a" : "#47b1cc"} />,
+          prevArrow: (
+            <FaChevronLeft color={lightMode ? "#78db5a" : "#47b1cc"} />
+          ),
+          nextArrow: (
+            <FaChevronRight color={lightMode ? "#78db5a" : "#47b1cc"} />
+          ),
           responsive: [
             {
               breakpoint: 1024,
@@ -171,7 +175,7 @@ const Attendance = () => {
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 initialSlide: 1,
-                dots: true,
+                dots: false,
               },
             },
             {
