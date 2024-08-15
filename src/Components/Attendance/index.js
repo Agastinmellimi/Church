@@ -301,7 +301,7 @@ const Attendance = () => {
                   className="ChildStaus"
                 >
                   <Sno $mode={lightMode} $present={item.presents}>
-                    {apiResponsedData.byDateDeails.indexOf(item) + 1}.
+                    {item.id}
                   </Sno>
                   <Name
                     $present={item.presents}
