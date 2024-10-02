@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { VscBracketError } from "react-icons/vsc";
 import HandlerContext from "../../Context/HandlerContext";
 import { Skeleton } from "@mui/material";
 import { MdSignalWifiStatusbarNotConnected } from "react-icons/md";
+import { v4 as uuidv4 } from "uuid";
 
 import {
   ChildrenNamescontainer,
@@ -15,6 +17,7 @@ import {
   NameFlexContainer,
   RollNo,
 } from "./StyledComponents";
+
 
 const apiStatus = {
   initial: "INITIAL",
@@ -29,6 +32,8 @@ const ChildrenNames = () => {
     childrenListApiStatus: apiStatus.initial,
     allChildrenDetails: [],
   });
+
+  const navigate = useNavigate()
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -74,7 +79,7 @@ const ChildrenNames = () => {
     const skeleton = [];
     for (let i = 1; i < 7; i++) {
       skeleton.push(
-        <Children $mode={lightMode}>
+        <Children $mode={lightMode} key={uuidv4()}>
           <Skeleton
             // animation="wave"
             variant="circular"
@@ -191,7 +196,7 @@ const ChildrenNames = () => {
   const successView = (lightMode) => (
     <ChildrensListContainer>
       {apiResponsedData.allChildrenDetails.map((item) => (
-        <Children $mode={lightMode} key={item.id}>
+        <Children $mode={lightMode} key={uuidv4()} onClick={() => navigate(`/attendance/${item.id}`)} >
           <ImageChildren
             alt="childrenImage"
             src={
@@ -203,7 +208,7 @@ const ChildrenNames = () => {
             }
           />
           <NameFlexContainer>
-            <ChildrenName $mode={lightMode}>{item.name}</ChildrenName>
+            <ChildrenName $mode={lightMode}>{item.name.split(" ")[0]}</ChildrenName>
             <RollNo $mode={lightMode}>{item.id}</RollNo>
           </NameFlexContainer>
         </Children>

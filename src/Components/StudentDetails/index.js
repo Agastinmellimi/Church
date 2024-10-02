@@ -56,7 +56,9 @@ const StudentDeatils = () => {
     childrenData: [],
     childName: "",
     max: null,
+    second: null,
     min: null,
+    workingDays: null,
     childPresent: "",
 
     scoreStatus: apiStatus.initial,
@@ -105,7 +107,13 @@ const StudentDeatils = () => {
       };
       const response = await fetch(url, options);
       const data = await response.json();
-
+      const temp = data.details.map((item) => {
+        if (item.presents !== Math.max(...data.details.map((item) => item.presents))) {
+          return item.presents
+        } else {
+          return null
+        }
+      })
       if (response.ok) {
         const child = data.details.find(
           (item) => item.id === parseInt(id)
@@ -121,8 +129,10 @@ const StudentDeatils = () => {
           ...prev,
           childrenData: data.details.filter((item) => item.id === parseInt(id)),
           childName: formattedName,
-          max: data.workingDays,
+          max: Math.max(...data.details.map((item) => item.presents)),
+          workingDays: data.workingDays,
           min: Math.min(...data.details.map((item) => item.presents)),
+          second: Math.max(...temp),
           childPresent: data.details.find((item) => item.id === parseInt(id))
             .presents,
           childApiStatus: apiStatus.success,
@@ -149,7 +159,7 @@ const StudentDeatils = () => {
     switch (apiResponsedData.childPresent) {
       case apiResponsedData.max:
         return "Congratulations on achieving the best attendance! Your commitment and dedication have truly paid off. Keep up the excellent work!";
-      case apiResponsedData.max - 1:
+      case apiResponsedData.second:
         return "Congratulations on your consistent efforts and progress, even amidst challenges. Remember, every setback is an opportunity for growth. Keep pushing forward, and know that we're here to support you every step of the way.";
       case apiResponsedData.min:
         return "We've noticed that your attendance has been lower compared to other students. We understand that everyone faces different challenges, and we're here to support you in overcoming any obstacles that may be affecting your attendance. Let's work together to find solutions and improve your attendance so you can fully engage in the learning experience alongside your peers.";
@@ -226,7 +236,7 @@ const StudentDeatils = () => {
         }));
 
         const getPercentage = () => {
-          const { max, childPresent } = apiResponsedData;
+          const { workingDays, childPresent } = apiResponsedData;
           // switch (childPresent) {
           //   case max:
           //     return 100
@@ -242,21 +252,22 @@ const StudentDeatils = () => {
           //     return 0
           // }
 
-          return parseInt((childPresent / max) * 100); //changed
+          return parseInt((childPresent / workingDays) * 100); //changed
         };
 
         const DetailsSuccessView = () => (
           <StudentDetailsContainer>
-            <img
-              style={{
-                width: "120px",
-                height: "120px",
-                borderRadius: "8px",
-              }}
-              src={apiResponsedData.childrenData[0].image}
-              alt={apiResponsedData.childrenData.name}
-            />
-
+            {apiResponsedData.childrenData[0].image === null ? null : (
+              <img
+                style={{
+                  width: "120px",
+                  height: "120px",
+                  borderRadius: "8px",
+                }}
+                src={apiResponsedData.childrenData[0].image}
+                alt={apiResponsedData.childrenData.name}
+              />
+            )}
             <WishNameContainer>
               <WishName $mode={lightMode}>
                 Hi{" "}
@@ -267,7 +278,7 @@ const StudentDeatils = () => {
                         ? lightMode
                           ? "#18ad56"
                           : "#38c272"
-                        : apiResponsedData.max - 1 ===
+                        : apiResponsedData.second ===
                           apiResponsedData.childPresent
                         ? lightMode
                           ? "#d47531"
@@ -293,7 +304,7 @@ const StudentDeatils = () => {
                   src="https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711517840/taeppt3smddagg6zyans.gif"
                 />
               )}
-              {apiResponsedData.childPresent === apiResponsedData.max - 1 && (
+              {apiResponsedData.childPresent === apiResponsedData.second && (
                 <Badge
                   alt="badge2"
                   src="https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711524944/rip020bypucmw5ncmwzr.png"
@@ -330,7 +341,7 @@ const StudentDeatils = () => {
                   }}
                   strokeWidth={2}
                   interval={0}
-                  domain={[0, apiResponsedData.max]}
+                  domain={[0, apiResponsedData.workingDays]}
                 />
                 <YAxis
                   dataKey="name"
@@ -376,7 +387,7 @@ const StudentDeatils = () => {
                       ? lightMode
                         ? "#18ad56"
                         : "#38c272"
-                      : apiResponsedData.max - 1 ===
+                      : apiResponsedData.second ===
                         apiResponsedData.childPresent
                       ? lightMode
                         ? "#d47531"
@@ -399,12 +410,10 @@ const StudentDeatils = () => {
               style={{
                 color:
                   apiResponsedData.max === apiResponsedData.childPresent
-                    ? lightMode
-                      ? "#18ad56"
-                      : "#38c272"
-                    : lightMode
-                    ? "#575656"
-                    : "#dedede",
+                   ? lightMode ? "#18ad56" 
+                   : "#38c272" 
+                   :  apiResponsedData.second === apiResponsedData.childPresent
+                   ? lightMode ? '#d47531' : '#d47531' : lightMode ? "#575656" : "#dedede",
               }}
             >
               <IoArrowRedoSharp
@@ -456,7 +465,7 @@ const StudentDeatils = () => {
                           ? lightMode
                             ? "#18ad56"
                             : "#38c272"
-                          : apiResponsedData.max - 1 ===
+                          : apiResponsedData.second ===
                             apiResponsedData.childPresent
                           ? lightMode
                             ? "#d47531"
@@ -480,7 +489,7 @@ const StudentDeatils = () => {
                         ? lightMode
                           ? "#18ad56"
                           : "#38c272"
-                        : apiResponsedData.max - 1 ===
+                        : apiResponsedData.second ===
                           apiResponsedData.childPresent
                         ? lightMode
                           ? "#d47531"

@@ -73,6 +73,8 @@ const Attendance = () => {
     byDateErr: "",
     allChildrenDetails: [],
     days: 0,
+    max: 0,
+    second: 0,
     allChildrenListApiStatus: apiStatus.inProgress,
   });
 
@@ -102,12 +104,23 @@ const Attendance = () => {
       };
       const response = await fetch(url, options);
       const data = await response.json();
+      const temp = data.details.map((item) => {
+        if (item.presents !== Math.max(...data.details.map((item) => item.presents))) {
+          return item.presents
+        } else {
+          return null
+        }
+      })
+      
       if (response.ok) {
         setApiResponseData((prev) => ({
           ...prev,
           allChildrenDetails: data.details,
           days: data.workingDays,
+          second: Math.max(...temp),
           allChildrenListApiStatus: apiStatus.success,
+          max: Math.max(...data.details.map((item) => item.presents)),
+        
         }));
       } else {
         setApiResponseData((prev) => ({
@@ -146,6 +159,28 @@ const Attendance = () => {
     <HandlerContext.Consumer>
       {(value) => {
         const { lightMode } = value;
+        const PrevArrow = (props) => {
+          const { className, style, onClick } = props;
+          return (
+            <FaChevronLeft
+              {...{ style }}
+              className={className}
+              onClick={onClick}
+              color={lightMode ? "#78db5a" : "#47b1cc"}
+            />
+          );
+        };
+        const NextArrow = (props) => {
+          const { className, style, onClick } = props;
+          return (
+            <FaChevronRight
+              {...{ style }}
+              className={className}
+              onClick={onClick}
+              color={lightMode ? "#78db5a" : "#47b1cc"}
+            />
+          );
+        };
         const settings = {
           slidesToShow: 3,
           slidesToScroll: 3,
@@ -154,12 +189,8 @@ const Attendance = () => {
           dotsClass: "slick-dots",
           arrows: true,
           dots: true,
-          prevArrow: (
-            <FaChevronLeft color={lightMode ? "#78db5a" : "#47b1cc"} />
-          ),
-          nextArrow: (
-            <FaChevronRight color={lightMode ? "#78db5a" : "#47b1cc"} />
-          ),
+          prevArrow: <PrevArrow />,
+          nextArrow: <NextArrow />,
           responsive: [
             {
               breakpoint: 1024,
@@ -301,7 +332,7 @@ const Attendance = () => {
                   className="ChildStaus"
                 >
                   <Sno $mode={lightMode} $present={item.presents}>
-                    {item.id}
+                    {item.id}.
                   </Sno>
                   <Name
                     $present={item.presents}
@@ -574,7 +605,8 @@ const Attendance = () => {
         );
 
         const getStatusLine = (presents) => {
-          const max = apiResponsedData.days;
+          const max = apiResponsedData.max;
+          
           const min = Math.min(
             ...apiResponsedData.allChildrenDetails.map((item) => item.presents)
           );
@@ -605,7 +637,7 @@ const Attendance = () => {
                   backSpeed={90}
                 />
               );
-            case max - 1:
+            case apiResponsedData.second:
               return (
                 <ReactTyped
                   strings={["Nice, keep going..."]}
@@ -697,15 +729,17 @@ const Attendance = () => {
         };
 
         const getDefaultImage = (presents) => {
-          const max = apiResponsedData.days;
+          const max = apiResponsedData.max;
+          
           const min = Math.min(
             ...apiResponsedData.allChildrenDetails.map((item) => item.presents)
           );
+         
 
           switch (presents) {
             case max:
               return "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711029483/zrqhr6yvxase3dlx46b6.gif";
-            case max - 1:
+            case apiResponsedData.second:
               return "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711030921/l5yiy9ojhmlmalbkn6km.gif";
             case min:
               return "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711076400/s61h5r712grgdqdgyowf.gif";
@@ -717,88 +751,87 @@ const Attendance = () => {
         const detailsSuccessView = () => (
           <Slider {...settings}>
             {apiResponsedData.allChildrenDetails.map((item) => (
-              <div key={uuidv4()}>
-                <Container
-                  $mode={lightMode}
-                  $occur={apiResponsedData.days - 1 === item.presents}
-                  $max={apiResponsedData.days === item.presents}
-                >
-                  <NameFlexContainer>
-                    <ChildImage
-                      onClick={() => navigate(`/attendance/${item.id}`)}
-                      style={{ cursor: "pointer" }}
-                      alt={item.name.split(" ")[0]}
-                      src={
-                        item.image === null
-                          ? item.gender === "MALE"
-                            ? "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1710924465/ibuhzyczyszmehs4qbu3.png"
-                            : "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1706681443/uybys3x9m2u9rvm2wiiz.png"
-                          : item.image
-                      }
-                    />
-                    <ChildName
-                      onClick={() => navigate(`/attendance/${item.id}`)}
-                      style={{ cursor: "pointer" }}
-                      className="name"
-                      $max={apiResponsedData.days === item.presents}
-                      $occur={apiResponsedData.days - 1 === item.presents}
-                      $mode={lightMode}
-                    >
-                      {item.name} <MdOutlineArrowOutward className="arrow" />
-                    </ChildName>
-                  </NameFlexContainer>
-                  <hr
-                    style={{
-                      width: "100%",
-                      border:
-                        apiResponsedData.days === item.presents
-                          ? lightMode
-                            ? "1.2px solid #07a631"
-                            : "1.2px solid #63f298"
-                          : apiResponsedData.days - 1 === item.presents
-                          ? lightMode
-                            ? "1.5px solid #BE861A"
-                            : "1.5px solid #F5CA77"
-                          : "1.5px solid #c4c7c3",
-                    }}
+              <Container
+                key={uuidv4()}
+                $mode={lightMode}
+                $occur={apiResponsedData.second === item.presents}
+                $max={apiResponsedData.max === item.presents}
+              >
+                <NameFlexContainer>
+                  <ChildImage
+                    onClick={() => navigate(`/attendance/${item.id}`)}
+                    style={{ cursor: "pointer" }}
+                    alt={item.name.split(" ")[0]}
+                    src={
+                      item.image === null
+                        ? item.gender === "MALE"
+                          ? "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1710924465/ibuhzyczyszmehs4qbu3.png"
+                          : "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1706681443/uybys3x9m2u9rvm2wiiz.png"
+                        : item.image
+                    }
                   />
-                  <Presents
-                    $max={apiResponsedData.days === item.presents}
-                    $occur={apiResponsedData.days - 1 === item.presents}
+                  <ChildName
+                    onClick={() => navigate(`/attendance/${item.id}`)}
+                    style={{ cursor: "pointer" }}
+                    className="name"
+                    $max={apiResponsedData.max === item.presents}
+                    $occur={apiResponsedData.second === item.presents}
                     $mode={lightMode}
                   >
-                    presents: {item.presents}
-                  </Presents>
-                  <WishLineContainer>
-                    <WishLine
-                      $max={apiResponsedData.days === item.presents}
-                      $min={
-                        Math.min(
-                          ...apiResponsedData.allChildrenDetails.map(
-                            (item) => item.presents
-                          )
-                        ) === item.presents
-                      }
-                      $occur={apiResponsedData.days - 1 === item.presents}
-                      $mode={lightMode}
-                    >
-                      {getStatusLine(item.presents)}
-                    </WishLine>
+                    {item.name} <MdOutlineArrowOutward className="arrow" />
+                  </ChildName>
+                </NameFlexContainer>
+                <hr
+                  style={{
+                    width: "100%",
+                    border:
+                      apiResponsedData.days === item.presents
+                        ? lightMode
+                          ? "1.2px solid #07a631"
+                          : "1.2px solid #63f298"
+                        : apiResponsedData.second === item.presents
+                        ? lightMode
+                          ? "1.5px solid #BE861A"
+                          : "1.5px solid #F5CA77"
+                        : "1.5px solid #c4c7c3",
+                  }}
+                />
+                <Presents
+                  $max={apiResponsedData.max === item.presents}
+                  $occur={apiResponsedData.second === item.presents}
+                  $mode={lightMode}
+                >
+                  presents: {item.presents}
+                </Presents>
+                <WishLineContainer>
+                  <WishLine
+                    $max={apiResponsedData.max === item.presents}
+                    $min={
+                      Math.min(
+                        ...apiResponsedData.allChildrenDetails.map(
+                          (item) => item.presents
+                        )
+                      ) === item.presents
+                    }
+                    $occur={apiResponsedData.second === item.presents}
+                    $mode={lightMode}
+                  >
+                    {getStatusLine(item.presents)}
+                  </WishLine>
 
-                    <img
-                      alt={
-                        apiResponsedData.days === item.presents
-                          ? "max"
-                          : apiResponsedData.days - 1 === item.presents
-                          ? "occur"
-                          : "keep go"
-                      }
-                      style={{ width: "35px", height: "35px" }}
-                      src={getDefaultImage(item.presents)}
-                    />
-                  </WishLineContainer>
-                </Container>
-              </div>
+                  <img
+                    alt={
+                      apiResponsedData.max === item.presents
+                        ? "max"
+                        : apiResponsedData.second === item.presents
+                        ? "occur"
+                        : "keep go"
+                    }
+                    style={{ width: "35px", height: "35px" }}
+                    src={getDefaultImage(item.presents)}
+                  />
+                </WishLineContainer>
+              </Container>
             ))}
           </Slider>
         );

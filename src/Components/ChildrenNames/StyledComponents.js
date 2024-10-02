@@ -41,14 +41,15 @@ export const ChildrensListContainer = styled.ul`
 export const Children = styled.li`
   list-style: none;
   background-color: ${(props) => (props.$mode ? "#ffff" : "#262626")};
-
+  border: ${(props) => (props.$mode ? "#ffff 0.2px solid" : "#262626 0.2px solid")};
+  cursor: pointer;
   padding: 5px 20px 5px 20px;
   display: flex;
   align-items: center;
   width: 100%;
   text-overflow: ellipsis;
   border-radius: 5px;
-
+  
   margin-bottom: 20px;
   @media (max-width: 400px) {
     flex-direction: column;
@@ -56,6 +57,11 @@ export const Children = styled.li`
   }
   @media (min-width: 768px) {
     width: 48%;
+  }
+  transition: all .3s ease-in-out;
+  &:hover{
+    
+    border:  ${(props) => (props.$mode ? "#353635 0.2px solid" : "#d7f5df 0.2px solid")};
   }
 `;
 export const ImageChildren = styled.img`
@@ -70,6 +76,7 @@ export const ImageChildren = styled.img`
     align-self: flex-start;
     margin-top: 5px;
   }
+  
 `;
 export const ChildrenName = styled.p`
   font-family: "Madimi One", sans-serif;
