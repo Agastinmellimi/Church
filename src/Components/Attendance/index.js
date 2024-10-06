@@ -105,13 +105,16 @@ const Attendance = () => {
       const response = await fetch(url, options);
       const data = await response.json();
       const temp = data.details.map((item) => {
-        if (item.presents !== Math.max(...data.details.map((item) => item.presents))) {
-          return item.presents
+        if (
+          item.presents !==
+          Math.max(...data.details.map((item) => item.presents))
+        ) {
+          return item.presents;
         } else {
-          return null
+          return null;
         }
-      })
-      
+      });
+
       if (response.ok) {
         setApiResponseData((prev) => ({
           ...prev,
@@ -120,7 +123,6 @@ const Attendance = () => {
           second: Math.max(...temp),
           allChildrenListApiStatus: apiStatus.success,
           max: Math.max(...data.details.map((item) => item.presents)),
-        
         }));
       } else {
         setApiResponseData((prev) => ({
@@ -606,7 +608,7 @@ const Attendance = () => {
 
         const getStatusLine = (presents) => {
           const max = apiResponsedData.max;
-          
+
           const min = Math.min(
             ...apiResponsedData.allChildrenDetails.map((item) => item.presents)
           );
@@ -665,12 +667,13 @@ const Attendance = () => {
 
           if (value !== null) {
             const dateValue = `${value.$y}-${
-              value.$M + 1 < 10 ? `0${value.$M + 1}` : value.$M
+              value.$M + 1 < 10 ? `0${value.$M + 1}` : value.$M + 1
             }-${value.$D < 10 ? `0${value.$D}` : value.$D}`;
             setApiResponseData((prev) => ({
               ...prev,
               byDateApiStatus: apiStatus.inProgress,
             }));
+            console.log(dateValue);
             try {
               const attendanceUrl =
                 "https://church-backend-k1y9.onrender.com/date-attendance";
@@ -730,11 +733,10 @@ const Attendance = () => {
 
         const getDefaultImage = (presents) => {
           const max = apiResponsedData.max;
-          
+
           const min = Math.min(
             ...apiResponsedData.allChildrenDetails.map((item) => item.presents)
           );
-         
 
           switch (presents) {
             case max:
