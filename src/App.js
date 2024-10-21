@@ -9,7 +9,7 @@ import Attendance from "./Components/Attendance";
 import HomeView from "./Components/HomeView";
 import About from "./Components/About";
 import StudentDeatils from "./Components/StudentDetails";
-import ViewChildDetails from "./Components/ViewChildDetails";
+
 import { Container, FlexContainer, ContentContainer } from "./StyledComponents";
 import "./index.css";
 
@@ -50,11 +50,7 @@ class App extends Component {
                   path="/attendance/:id"
                   element={<StudentDeatils />}
                 />
-                <Route
-                  exact
-                  path="/view-child/:id"
-                  element={<ViewChildDetails />}
-                />
+
                 <Route
                   exact
                   path="/church-timings"

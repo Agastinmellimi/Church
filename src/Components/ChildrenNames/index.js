@@ -18,7 +18,6 @@ import {
   RollNo,
 } from "./StyledComponents";
 
-
 const apiStatus = {
   initial: "INITIAL",
   inProgress: "IN_PROGRESS",
@@ -33,7 +32,7 @@ const ChildrenNames = () => {
     allChildrenDetails: [],
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -59,7 +58,7 @@ const ChildrenNames = () => {
           ...prev,
           allChildrenDetails: data.details,
 
-          childrenListApiStatus: apiStatus.success,
+          childrenListApiStatus: apiStatus.inProgress,
         }));
       } else {
         setApiResponseData((prev) => ({
@@ -95,7 +94,7 @@ const ChildrenNames = () => {
           <Skeleton
             // animation="wave"
             variant="rectanguler"
-            width="80%"
+            width={windowWidth <= 400 ? "100%" : "80%"}
             height={17}
             sx={{
               backgroundColor: "rgba(102, 101, 101, 0.355)",
@@ -196,7 +195,11 @@ const ChildrenNames = () => {
   const successView = (lightMode) => (
     <ChildrensListContainer>
       {apiResponsedData.allChildrenDetails.map((item) => (
-        <Children $mode={lightMode} key={uuidv4()} onClick={() => navigate(`/attendance/${item.id}`)} >
+        <Children
+          $mode={lightMode}
+          key={uuidv4()}
+          onClick={() => navigate(`/attendance/${item.id}`)}
+        >
           <ImageChildren
             alt="childrenImage"
             src={
@@ -208,7 +211,9 @@ const ChildrenNames = () => {
             }
           />
           <NameFlexContainer>
-            <ChildrenName $mode={lightMode}>{item.name.split(" ")[0]}</ChildrenName>
+            <ChildrenName $mode={lightMode}>
+              {item.name.split(" ")[0]}
+            </ChildrenName>
             <RollNo $mode={lightMode}>{item.id}</RollNo>
           </NameFlexContainer>
         </Children>
