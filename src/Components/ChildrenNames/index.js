@@ -58,7 +58,7 @@ const ChildrenNames = () => {
           ...prev,
           allChildrenDetails: data.details,
 
-          childrenListApiStatus: apiStatus.inProgress,
+          childrenListApiStatus: apiStatus.success,
         }));
       } else {
         setApiResponseData((prev) => ({
