@@ -108,12 +108,15 @@ const StudentDeatils = () => {
       const response = await fetch(url, options);
       const data = await response.json();
       const temp = data.details.map((item) => {
-        if (item.presents !== Math.max(...data.details.map((item) => item.presents))) {
-          return item.presents
+        if (
+          item.presents !==
+          Math.max(...data.details.map((item) => item.presents))
+        ) {
+          return item.presents;
         } else {
-          return null
+          return null;
         }
-      })
+      });
       if (response.ok) {
         const child = data.details.find(
           (item) => item.id === parseInt(id)
@@ -252,7 +255,9 @@ const StudentDeatils = () => {
           //     return 0
           // }
 
-          return parseInt((childPresent / workingDays) * 100); //changed
+          return childPresent !== 0
+            ? parseInt((childPresent / workingDays) * 100)
+            : 0; //changed
         };
 
         const DetailsSuccessView = () => (
@@ -410,10 +415,16 @@ const StudentDeatils = () => {
               style={{
                 color:
                   apiResponsedData.max === apiResponsedData.childPresent
-                   ? lightMode ? "#18ad56" 
-                   : "#38c272" 
-                   :  apiResponsedData.second === apiResponsedData.childPresent
-                   ? lightMode ? '#d47531' : '#d47531' : lightMode ? "#575656" : "#dedede",
+                    ? lightMode
+                      ? "#18ad56"
+                      : "#38c272"
+                    : apiResponsedData.second === apiResponsedData.childPresent
+                    ? lightMode
+                      ? "#d47531"
+                      : "#d47531"
+                    : lightMode
+                    ? "#575656"
+                    : "#dedede",
               }}
             >
               <IoArrowRedoSharp
