@@ -159,7 +159,9 @@ const StudentDeatils = () => {
   }, [id]);
 
   const statusLine = () => {
-    switch (apiResponsedData.childPresent) {
+    const data =
+      apiResponsedData.childPresent !== 0 ? apiResponsedData.childPresent : "";
+    switch (data) {
       case apiResponsedData.max:
         return "Congratulations on achieving the best attendance! Your commitment and dedication have truly paid off. Keep up the excellent work!";
       case apiResponsedData.second:
@@ -303,18 +305,22 @@ const StudentDeatils = () => {
                 </span>
                 , Your Report is here
               </WishName>
-              {apiResponsedData.childPresent === apiResponsedData.max && (
-                <Badge
-                  alt="badge1"
-                  src="https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711517840/taeppt3smddagg6zyans.gif"
-                />
-              )}
-              {apiResponsedData.childPresent === apiResponsedData.second && (
-                <Badge
-                  alt="badge2"
-                  src="https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711524944/rip020bypucmw5ncmwzr.png"
-                />
-              )}
+              {apiResponsedData.max !== 0
+                ? apiResponsedData.childPresent === apiResponsedData.max
+                : false && (
+                    <Badge
+                      alt="badge1"
+                      src="https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711517840/taeppt3smddagg6zyans.gif"
+                    />
+                  )}
+              {apiResponsedData.second !== 0
+                ? apiResponsedData.childPresent === apiResponsedData.second
+                : false && (
+                    <Badge
+                      alt="badge2"
+                      src="https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711524944/rip020bypucmw5ncmwzr.png"
+                    />
+                  )}
             </WishNameContainer>
             <ResponsiveContainer
               width="100%"
@@ -414,18 +420,31 @@ const StudentDeatils = () => {
               $mode={lightMode}
               style={{
                 color:
-                  apiResponsedData.max === apiResponsedData.childPresent
-                    ? lightMode
-                      ? "#18ad56"
-                      : "#38c272"
-                    : apiResponsedData.second === apiResponsedData.childPresent
-                    ? lightMode
-                      ? "#d47531"
-                      : "#d47531"
-                    : lightMode
-                    ? "#575656"
-                    : "#dedede",
+                  apiResponsedData.max !== 0
+                    ? apiResponsedData.max === apiResponsedData.childPresent
+                      ? lightMode
+                        ? "1.2px solid #07a631"
+                        : "1.2px solid #63f298"
+                      : "1.5px solid #c4c7c3"
+                    : apiResponsedData.second !== 0
+                    ? apiResponsedData.second === apiResponsedData.childPresent
+                      ? lightMode
+                        ? "1.5px solid #BE861A"
+                        : "1.5px solid #F5CA77"
+                      : "1.5px solid #c4c7c3"
+                    : "1.5px solid #c4c7c3",
               }}
+              // apiResponsedData.max === apiResponsedData.childPresent
+              //   ? lightMode
+              //     ? "#18ad56"
+              //     : "#38c272"
+              //   : apiResponsedData.second === apiResponsedData.childPresent
+              //   ? lightMode
+              //     ? "#d47531"
+              //     : "#d47531"
+              //   : lightMode
+              //   ? "#575656"
+              //   : "#dedede",
             >
               <IoArrowRedoSharp
                 style={{
