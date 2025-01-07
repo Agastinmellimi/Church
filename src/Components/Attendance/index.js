@@ -120,9 +120,12 @@ const Attendance = () => {
           ...prev,
           allChildrenDetails: data.details,
           days: data.workingDays,
-          second: Math.max(...temp),
+          second: Math.max(...temp) === 0 ? "" : Math.max(...temp),
           allChildrenListApiStatus: apiStatus.success,
-          max: Math.max(...data.details.map((item) => item.presents)),
+          max:
+            Math.max(...data.details.map((item) => item.presents)) === 0
+              ? ""
+              : Math.max(...data.details.map((item) => item.presents)),
         }));
       } else {
         setApiResponseData((prev) => ({
@@ -607,13 +610,12 @@ const Attendance = () => {
         );
 
         const getStatusLine = (presents) => {
-          const data = presents !== 0 ? presents : " ";
           const max = apiResponsedData.max;
 
           const min = Math.min(
             ...apiResponsedData.allChildrenDetails.map((item) => item.presents)
           );
-          switch (data) {
+          switch (presents) {
             case max:
               return (
                 <ReactTyped
@@ -758,16 +760,8 @@ const Attendance = () => {
               <Container
                 key={uuidv4()}
                 $mode={lightMode}
-                $occur={
-                  apiResponsedData.second !== 0
-                    ? apiResponsedData.second === item.presents
-                    : false
-                }
-                $max={
-                  apiResponsedData.max !== 0
-                    ? apiResponsedData.max === item.presents
-                    : false
-                }
+                $occur={apiResponsedData.second === item.presents}
+                $max={apiResponsedData.max === item.presents}
               >
                 <NameFlexContainer>
                   <ChildImage
@@ -786,16 +780,8 @@ const Attendance = () => {
                     onClick={() => navigate(`/attendance/${item.id}`)}
                     style={{ cursor: "pointer" }}
                     className="name"
-                    $occur={
-                      apiResponsedData.second !== 0
-                        ? apiResponsedData.second === item.presents
-                        : false
-                    }
-                    $max={
-                      apiResponsedData.max !== 0
-                        ? apiResponsedData.max === item.presents
-                        : false
-                    }
+                    $occur={apiResponsedData.second === item.presents}
+                    $max={apiResponsedData.max === item.presents}
                     $mode={lightMode}
                   >
                     {item.name} <MdOutlineArrowOutward className="arrow" />
@@ -805,53 +791,28 @@ const Attendance = () => {
                   style={{
                     width: "100%",
                     border:
-                      apiResponsedData.max !== 0
-                        ? apiResponsedData.max === item.presents
+                      apiResponsedData.max === item.presents
+                        ? lightMode
                           ? "1.2px solid #07a631"
                           : "1.2px solid #63f298"
-                        : apiResponsedData.second !== 0
-                        ? apiResponsedData.second === item.presents
+                        : apiResponsedData.second === item.presents
+                        ? lightMode
                           ? "1.5px solid #BE861A"
                           : "1.5px solid #F5CA77"
                         : "1.5px solid #c4c7c3",
-                    // apiResponsedData.days === item.presents
-                    //   ? lightMode
-                    //     ? "1.2px solid #07a631"
-                    //     : "1.2px solid #63f298"
-                    //   : apiResponsedData.second === item.presents
-                    //   ? lightMode
-                    //     ? "1.5px solid #BE861A"
-                    //     : "1.5px solid #F5CA77"
-                    //   : "1.5px solid #c4c7c3",
                   }}
                 />
                 <Presents
-                  $occur={
-                    apiResponsedData.second !== 0
-                      ? apiResponsedData.second === item.presents
-                      : false
-                  }
-                  $max={
-                    apiResponsedData.max !== 0
-                      ? apiResponsedData.max === item.presents
-                      : false
-                  }
+                  $occur={apiResponsedData.second === item.presents}
+                  $max={apiResponsedData.max === item.presents}
                   $mode={lightMode}
                 >
                   presents: {item.presents}
                 </Presents>
                 <WishLineContainer>
                   <WishLine
-                    $occur={
-                      apiResponsedData.second !== 0
-                        ? apiResponsedData.second === item.presents
-                        : false
-                    }
-                    $max={
-                      apiResponsedData.max !== 0
-                        ? apiResponsedData.max === item.presents
-                        : false
-                    }
+                    $occur={apiResponsedData.second === item.presents}
+                    $max={apiResponsedData.max === item.presents}
                     $min={
                       item.presents !== 0
                         ? Math.min(
