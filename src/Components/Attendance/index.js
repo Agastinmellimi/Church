@@ -735,14 +735,13 @@ const Attendance = () => {
         };
 
         const getDefaultImage = (presents) => {
-          const data = presents !== 0 ? presents : " ";
           const max = apiResponsedData.max;
 
           const min = Math.min(
             ...apiResponsedData.allChildrenDetails.map((item) => item.presents)
           );
 
-          switch (data) {
+          switch (presents) {
             case max:
               return "https://res.cloudinary.com/dkrpgt9kd/image/upload/v1711029483/zrqhr6yvxase3dlx46b6.gif";
             case apiResponsedData.second:
