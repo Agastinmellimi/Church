@@ -30,6 +30,8 @@ const ChildrenNames = () => {
   const [apiResponsedData, setApiResponseData] = useState({
     childrenListApiStatus: apiStatus.initial,
     allChildrenDetails: [],
+    second: null,
+    max: null,
   });
 
   const navigate = useNavigate();
@@ -53,11 +55,26 @@ const ChildrenNames = () => {
       };
       const response = await fetch(url, options);
       const data = await response.json();
+
       if (response.ok) {
+        const temp = data.details.map((item) => {
+          if (
+            item.presents !==
+            Math.max(...data.details.map((item) => item.presents))
+          ) {
+            return item.presents;
+          } else {
+            return null;
+          }
+        });
         setApiResponseData((prev) => ({
           ...prev,
           allChildrenDetails: data.details,
-
+          second: Math.max(...temp) === 0 ? "" : Math.max(...temp),
+          max:
+            Math.max(...data.details.map((item) => item.presents)) === 0
+              ? ""
+              : Math.max(...data.details.map((item) => item.presents)),
           childrenListApiStatus: apiStatus.success,
         }));
       } else {
@@ -196,11 +213,16 @@ const ChildrenNames = () => {
     <ChildrensListContainer>
       {apiResponsedData.allChildrenDetails.map((item) => (
         <Children
+          $occur={apiResponsedData.second === item.presents}
+          $max={apiResponsedData.max === item.presents}
           $mode={lightMode}
           key={uuidv4()}
           onClick={() => navigate(`/attendance/${item.id}`)}
         >
           <ImageChildren
+            $occur={apiResponsedData.second === item.presents}
+            $max={apiResponsedData.max === item.presents}
+            $mode={lightMode}
             alt="childrenImage"
             src={
               item.image === null
@@ -211,10 +233,20 @@ const ChildrenNames = () => {
             }
           />
           <NameFlexContainer>
-            <ChildrenName $mode={lightMode}>
+            <ChildrenName
+              $occur={apiResponsedData.second === item.presents}
+              $max={apiResponsedData.max === item.presents}
+              $mode={lightMode}
+            >
               {item.name.split(" ")[0]}
             </ChildrenName>
-            <RollNo $mode={lightMode}>{item.id}</RollNo>
+            <RollNo
+              $occur={apiResponsedData.second === item.presents}
+              $max={apiResponsedData.max === item.presents}
+              $mode={lightMode}
+            >
+              {item.id}
+            </RollNo>
           </NameFlexContainer>
         </Children>
       ))}

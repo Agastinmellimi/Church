@@ -41,7 +41,14 @@ export const ChildrensListContainer = styled.ul`
 export const Children = styled.li`
   list-style: none;
   background-color: ${(props) => (props.$mode ? "#ffff" : "#262626")};
-  border: ${(props) => (props.$mode ? "#ffff 0.2px solid" : "#262626 0.2px solid")};
+  border: ${(props) =>
+    props.$max
+      ? "#1fb829 0.3px solid"
+      : `${
+          props.$occur
+            ? "Orange 0.3px solid"
+            : `${props.$mode ? "#ffff 0.3px solid" : "@262626 0.3px solid"}`
+        }`};
   cursor: pointer;
   padding: 5px 20px 5px 20px;
   display: flex;
@@ -49,7 +56,7 @@ export const Children = styled.li`
   width: 100%;
   text-overflow: ellipsis;
   border-radius: 5px;
-  
+
   margin-bottom: 20px;
   @media (max-width: 400px) {
     flex-direction: column;
@@ -58,16 +65,36 @@ export const Children = styled.li`
   @media (min-width: 768px) {
     width: 48%;
   }
-  transition: all .3s ease-in-out;
-  &:hover{
-    
-    border:  ${(props) => (props.$mode ? "#353635 0.2px solid" : "#d7f5df 0.2px solid")};
-  }
+  /* transition: all 0.3s ease-in-out;
+  &:hover {
+    border: ${(props) =>
+    props.$mode ? "#353635 0.2px solid" : "#d7f5df 0.2px solid"};
+  } */
+  ${(props) =>
+    props.$max &&
+    `
+       
+       background-color: ${
+         props.$mode ? "#a2f5a7" : "rgba(154, 241, 153, 0.35)"
+       };
+       
+  `}
+
+  ${(props) =>
+    props.$occur &&
+    ` 
+       background-color: ${
+         props.$mode ? "#f7e5c6" : "rgba(245, 203, 118, 0.26)"
+       };
+      
+
+  `}
 `;
 export const ImageChildren = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
+
   @media (max-width: 700px) {
     width: 40px;
     height: 40px;
@@ -76,7 +103,17 @@ export const ImageChildren = styled.img`
     align-self: flex-start;
     margin-top: 5px;
   }
-  
+  ${(props) =>
+    props.$max &&
+    `
+     border: ${props.$mode ? "#31b53c 2px solid" : "#74ed7c 2px solid"};
+  `}
+
+  ${(props) =>
+    props.$occur &&
+    ` 
+      border: ${props.$mode ? "#ebac2f 2px solid" : "#e8c661 2px solid"};
+  `}
 `;
 export const ChildrenName = styled.p`
   font-family: "Madimi One", sans-serif;
@@ -99,6 +136,17 @@ export const ChildrenName = styled.p`
     margin-top: 0;
     margin-bottom: 3px;
   }
+  ${(props) =>
+    props.$max &&
+    `
+     color: ${props.$mode ? "#31b53c" : "#74ed7c"};
+  `}
+
+  ${(props) =>
+    props.$occur &&
+    ` 
+      color: ${props.$mode ? "#ebac2f" : "#e8c661"};
+  `}
 `;
 
 export const Paragraph = styled.p`
@@ -136,4 +184,17 @@ export const RollNo = styled.p`
   @media (max-width: 400px) {
     align-self: flex-end;
   }
+  ${(props) =>
+    props.$max &&
+    `
+     color: ${props.$mode ? "#31b53c" : "#74ed7c"};
+     border: ${props.$mode ? "#31b53c 2px solid" : "#74ed7c 2px solid"};
+  `}
+
+  ${(props) =>
+    props.$occur &&
+    ` 
+      color: ${props.$mode ? "#ebac2f" : "#e8c661"};
+      border: ${props.$mode ? "#ebac2f 2px solid" : "#e8c661 2px solid"};
+  `}
 `;
